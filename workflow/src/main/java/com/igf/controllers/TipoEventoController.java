@@ -24,8 +24,8 @@ public class TipoEventoController {
 	//Listar
 	@GetMapping("")
 	public String index(Model model) {
-		model.addAttribute("list", tipoEventoService.list());
-		return "layout";
+		model.addAttribute("tipos", tipoEventoService.list());
+		return "tipoEvento/index";
 	}
 	
 	//Vista Crear
