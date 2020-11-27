@@ -1,37 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>Tipos de evento</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="../static/css/bootstrap.min.css" rel="stylesheet"
-	th:href="@{/css/bootstrap.min.css}">
-</head>
-
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<title layout:fragment="title">Tipos de evento</title>
 <body>
-	<div class="card">
-		<div class="card-header"></div>
-		<div class="card-body">
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th scope="col">Tipo de evento</th>
-			      <th scope="col">Icono</th>
-			      <th scope="col">Acciones</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr th:each="tipo : ${tipos}" >
-			      <td th:text="${tipo.nombre}">nombre tipo de evento</td>
-			      <td th:text="${tipo.icono}">nombre tipo de evento</td>
-			      <td>
-			      	<button class="btn btn-info">Editar</button>
-			      	<button class="btn btn-danger">Eliminar</button>
-			      </td>
-			    </tr>
-			  </tbody>
-			</table>
+
+	<a layout:fragment="titulo-vista" class="navbar-brand" href="javascript:;">Tipos de evento</a>
+	<div layout:fragment="content">
+		<div class="card">			
+			<div class="card-header">
+				<button class="btn btn-primary">+ Nuevo</button>
+			</div>
+			<div class="card-body">
+				<table class="table">
+					<thead>
+					  <tr>
+					    <th scope="col">Tipo de evento</th>
+					    <th scope="col">Acciones</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr th:each="tipo : ${tipos}" >
+					    <td th:text="${tipo.nombre}">nombre tipo de evento</td>
+					    <td>
+					     <button class="btn btn-info  btn-icon"><i class="nc-icon nc-settings-gear-65"></i></button>
+					     <button class="btn btn-danger btn-icon"><i class="nc-icon nc-simple-remove"></i></button>
+					    </td>
+					  </tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer"></div>
 		</div>
-		<div class="card-footer"></div>
 	</div>
 </body>
 </html>
