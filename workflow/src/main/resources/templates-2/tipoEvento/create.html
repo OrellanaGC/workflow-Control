@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Crear tipo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="../static/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+	<div class="card">
+		<div class="card-header"></div>
+		<div class="card-body">
+			<form action="#">
+				<input type="text" placeholder="ingresar algo">
+				<input type="text" placeholder="ingresar algo">
+				<input type="text" placeholder="ingresar algo">
+				<select>
+					<option>--Seleccionar algo--</option>
+					<option>opcion 1</option>
+					<option>opcion 2</option>
+					<option>opcion 2</option>
+				</select>
+				<button type="submit" class="btn btn-primary">Crear</button>
+				<button type="submit" class="btn btn-default">Cancelar</button>
+			</form>
+		</div>
+		<div class="card-footer"></div>
+	</div>
+</body>
+</html>
