@@ -25,7 +25,7 @@ public class TipoEventoController {
 	@GetMapping
 	public String index(Model model) {
 		model.addAttribute("tipos", tipoEventoService.list());
-		return "tipoEvento/index";
+		return "/tipoEvento/index";
 	}
 	
 	//Vista Crear
