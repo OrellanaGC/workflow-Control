@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
-<title layout:fragment="title">Tipos de evento</title>
+<title layout:fragment="title">Diagramas</title>
 <body>
-	<a layout:fragment="titulo-vista" class="navbar-brand" href="javascript:;">Tipos de evento</a>
+	<a layout:fragment="titulo-vista" class="navbar-brand" href="javascript:;">Diagramas</a>
 	<div layout:fragment="content">
 		<div class="card">			
 			<div class="card-header">
@@ -12,14 +12,14 @@
 				<table class="table table-hover">
 					<thead>
 					  <tr>
-					    <th scope="col">Tipo de evento</th>
+					    <th scope="col">Nombre</th>
 					    <th scope="col">Última modificación</th>
 					    <th scope="col">Acciones</th>
 					  </tr>
 					</thead>
 					<tbody>
-					  <tr th:each="tipo : ${tipos}" >
-					    <td th:text="${tipo.nombre}">nombre tipo de evento</td>
+					  <tr >
+					    <td >nombre tipo de evento</td>
 					    <td >DD/MM/YY</td>
 					    <td>
 					     <button class="btn btn-info  btn-icon"><i class="nc-icon nc-settings-gear-65"></i></button>
