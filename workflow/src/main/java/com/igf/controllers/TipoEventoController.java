@@ -45,7 +45,7 @@ public class TipoEventoController {
 	
 	//Vista actualizar
 	@GetMapping("/{id}")
-	public String edit(@PathVariable Long id, Model model) {
+	public String edit(@PathVariable Long id, Model model) {	
 		if(tipoEventoService.find(id).isPresent()) {
 			model.addAttribute("tipoEvento", tipoEventoService.find(id));
 			return "update";

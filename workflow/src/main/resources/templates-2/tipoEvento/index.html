@@ -15,12 +15,14 @@
 			  <thead>
 			    <tr>
 			      <th scope="col">Tipo de evento</th>
+			      <th scope="col">Icono</th>
 			      <th scope="col">Acciones</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    <tr th:each="tipo : ${tipos}" >
 			      <td th:text="${tipo.nombre}">nombre tipo de evento</td>
+			      <td th:text="${tipo.icono}">nombre tipo de evento</td>
 			      <td>
 			      	<button class="btn btn-info">Editar</button>
 			      	<button class="btn btn-danger">Eliminar</button>
