@@ -14,7 +14,7 @@ import com.igf.modelo.TipoEvento;
 import com.igf.negocio.servicios.TipoEventoService;
 
 @Controller
-@RequestMapping("/tipoEvento")
+@RequestMapping("/tiposEventos")
 public class TipoEventoController {
 	
 	@Autowired
@@ -22,24 +22,51 @@ public class TipoEventoController {
 	
 	
 	//Listar
-	@GetMapping
+	@GetMapping("")
 	public String index(Model model) {
 		model.addAttribute("list", tipoEventoService.list());
 		return "layout";
 	}
 	
 	//Vista Crear
+	@GetMapping("/create")
+	public String create(@PathVariable Long id, Model model) {
+		return "create";
+	}
 	
-	//Vista Actualizar
-	
-	//Guardar y actualizar
-	@PostMapping("/")	
-	public String save(Model model) {
+	//Guardar
+	@PostMapping("")	
+	public String store(Model model) {
 		TipoEvento tipoEvento= new TipoEvento();
 		tipoEventoService.save(tipoEvento);
 		return "redirect:/tipoEvento";
 	}	
 	
+	
+	//Vista actualizar
+	@GetMapping("/{id}")
+	public String edit(@PathVariable Long id, Model model) {
+		if(tipoEventoService.find(id).isPresent()) {
+			model.addAttribute("tipoEvento", tipoEventoService.find(id));
+			return "update";
+		}else {
+			return "redirect:/";
+		}
+		
+	}
+	
+	//Actualizar	
+	@PutMapping("/{id}")
+	public String update(@PathVariable Long id, Model model) {
+		return "";
+	}
+	
 	//Elimnar
-
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable Long id ,Model model) {		
+		if(tipoEventoService.find(id).isPresent()) {
+			tipoEventoService.delete(id);			
+		}
+		return "redirect:/";
+	}
 }
