@@ -23,6 +23,8 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.springframework.security:spring-security-test'
+	//Dependencia para recargar los html sin necesidad de cargar la aplicacion de nuevo
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 test {

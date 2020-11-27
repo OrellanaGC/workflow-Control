@@ -1,5 +1,6 @@
 package com.igf.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,11 +17,9 @@ import com.igf.negocio.servicios.TipoEventoService;
 @RequestMapping("/tipoEvento")
 public class TipoEventoController {
 	
-	private final TipoEventoService tipoEventoService;
+	@Autowired
+	private TipoEventoService tipoEventoService;
 	
-	public TipoEventoController(TipoEventoService tipoEventoService) {
-		this.tipoEventoService=tipoEventoService;
-	}	
 	
 	//Listar
 	@GetMapping

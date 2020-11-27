@@ -12,12 +12,9 @@ import com.igf.negocio.repositorio.TipoEventoRepository;
 @Service
 public class TipoEventoService {
 	
-	private final TipoEventoRepository tipoEventoRepository;
+	@Autowired
+	private TipoEventoRepository tipoEventoRepository;
 	
-	
-	public TipoEventoService(TipoEventoRepository tipoEventoRepository) {
-		this.tipoEventoRepository= tipoEventoRepository;
-	}
 	/*
 	 * Metodo para guardar o actualizar 
 	 */
