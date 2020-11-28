@@ -7,22 +7,26 @@
 	<div layout:fragment="content">
 		<div class="card">			
 			<div class="card-header">
-				<button class="btn btn-primary">+ Nuevo</button>
+				<a th:href="@{/tiposEventos/crear}" class="btn btn-primary">+ Nuevo</a>
 			</div>
 			<div class="card-body">
 				<table class="table">
 					<thead>
 					  <tr>
 					    <th scope="col">Tipo de evento</th>
+					    <th scope="col">Icono</th>
 					    <th scope="col">Acciones</th>
 					  </tr>
 					</thead>
 					<tbody>
 					  <tr th:each="tipo : ${tipos}" >
 					    <td th:text="${tipo.nombre}">nombre tipo de evento</td>
-					    <td>
-					     <button class="btn btn-info  btn-icon"><i class="nc-icon nc-settings-gear-65"></i></button>
-					     <button class="btn btn-danger btn-icon"><i class="nc-icon nc-simple-remove"></i></button>
+					    <td th:text="${tipo.icono}">icono tipo de evento</td>
+					    <td>					     
+					     <a th:href="@{/tiposEventos/editar/{id}(id=${tipo.id})}" class="btn btn-info btn-icon"><i class="nc-icon nc-settings-gear-65"></i></a>
+					     <a th:onclick="eliminar([[${tipo.id}]], '/tiposEventos/eliminar/', '/tiposEventos')" class="btn btn-danger btn-icon"><i class="nc-icon nc-simple-remove"></i></a>	
+					     				     
+					     <!-- <a th:href="@{/tiposEventos/eliminar/{id}(id=${tipo.id})}" class="btn btn-danger btn-icon"><i class="nc-icon nc-simple-remove"></i></a> -->					     
 					    </td>
 					  </tr>
 					</tbody>

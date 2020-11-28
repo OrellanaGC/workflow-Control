@@ -40,7 +40,13 @@ public class TipoEventoService {
 	 * Metodo para listar todos los tiposEventos
 	 */
 	public List<TipoEvento> list(){
-		return this.tipoEventoRepository.findAll();
+		return this.tipoEventoRepository.findAll();		
 	}
 	
+	/*
+	 * Metodo para saber si el registro existe en la base de datos
+	 */
+	public boolean exists(Long id) {
+		return this.tipoEventoRepository.existsById(id);
+	}
 }
