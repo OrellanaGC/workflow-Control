@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<title layout:fragment="title">Tipos de evento</title>
+<body>
+	<a layout:fragment="titulo-vista" class="navbar-brand"
+		href="javascript:;">Crear tipo de evento</a>
+	<div layout:fragment="content">
+		<div class="card">
+			<div class="card-header"></div>
+			<div class="card-body">				
+				<form th:action="@{/tiposEventos/guardar}" th:object="${tipoEvento}" method="POST" th:method="post" >					
+					<input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}"> 
+					<input type="text" placeholder="Icono" name="icono" th:field="*{icono}">
+					<input type="text" placeholder="Icono" name="icono" th:field="*{id}" hidden="true">					
+					<button type="submit" value="submit" class="btn btn-primary">Editar</button>
+					<a th:href="@{/tiposEventos}" class="btn btn-defautl">Cancelar</a>
+				</form>
+			</div>
+			<div class="card-footer"></div>
+		</div>
+	</div>
+</body>
+</html>
