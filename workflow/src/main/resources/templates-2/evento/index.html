@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<title layout:fragment="title">Tipos de evento</title>
+<body>
+
+	<a layout:fragment="titulo-vista" class="navbar-brand" href="javascript:;">Tipos de evento</a>
+	<div layout:fragment="content">
+		<div class="card">			
+			<div class="card-header">
+				<a th:href="@{/tiposEventos/crear}" class="btn btn-primary">+ Nuevo</a>
+			</div>
+			<div class="card-body">
+				<table class="table table-hover">
+					<thead>
+					  <tr>
+					    <th scope="col">Tipo de evento</th>
+					    <th scope="col">Icono</th>
+					    <th scope="col">Acciones</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr th:each="tipo : ${tipos}" >
+					    <td th:text="${tipo.nombre}">nombre tipo de evento</td>
+					    <td th:text="${tipo.icono}">icono tipo de evento</td>
+					    <td>					     
+					     <a th:href="@{/tiposEventos/editar/{id}(id=${tipo.id})}" class="btn btn-info btn-icon"><i class="nc-icon nc-settings-gear-65"></i></a>
+					     <a th:onclick="eliminar([[${tipo.id}]], '/tiposEventos/eliminar/', '/tiposEventos')" class="btn btn-danger btn-icon"><i class="nc-icon nc-simple-remove"></i></a>
+					    </td>
+					  </tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer"><a>Paginación falsa 1 2 3 4</a></div>
+		</div>
+	</div>
+</body>
+</html>
