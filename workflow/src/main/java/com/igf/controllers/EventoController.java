@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.igf.modelo.Evento;
 import com.igf.negocio.servicios.EventoService;
+import com.igf.negocio.servicios.TipoEventoService;
 
 
 @Controller
@@ -26,6 +27,9 @@ public class EventoController {
 
 	@Autowired
 	private EventoService eventoService;
+	
+	@Autowired
+	private TipoEventoService tipoEventoService;
 
 	// Listar
 	@GetMapping("")
@@ -39,6 +43,7 @@ public class EventoController {
 	public String create(Model model) {
 		Evento evento = new Evento();
 		model.addAttribute(evento);
+		model.addAttribute("tipoEventos", tipoEventoService.list());
 		return "/evento/create";
 	}
 
