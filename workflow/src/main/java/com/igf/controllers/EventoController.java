@@ -21,7 +21,7 @@ import com.igf.negocio.servicios.EventoService;
 import com.igf.negocio.servicios.TipoEventoService;
 
 
-@Controller
+@Controller //Sirve para que spring sepa que esta clase es un controlador
 @RequestMapping("/eventos")
 public class EventoController {
 
@@ -59,6 +59,7 @@ public class EventoController {
 	public String edit(@PathVariable Long id, Model model) {
 		if (eventoService.find(id).isPresent()) {
 			model.addAttribute("evento", eventoService.find(id));
+			model.addAttribute("tipoEventos", tipoEventoService.list());
 			return "/evento/edit";
 		} else {
 			return "redirect:/eventos";

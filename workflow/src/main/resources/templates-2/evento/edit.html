@@ -11,8 +11,14 @@
 			<div class="card-body">				
 				<form th:action="@{/eventos/guardar}" th:object="${evento}" method="POST" th:method="post" >					
 					<input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}"> 
-					<input type="text" placeholder="Icono" name="icono" th:field="*{icono}">
-					<input type="text" placeholder="Icono" name="icono" th:field="*{id}" hidden="true">					
+					<select th:field="*{tipoEvento}">
+						<option th:each="tipo : ${tipoEventos}" th:value="${tipo.id}">
+							<dl>
+							  <dt th:text="${tipo.nombre}">tipo evento</dt>
+							</dl>
+						</option>
+					</select>
+					<input type="text" placeholder="TipoEvento" name="tipoEvento" th:field="*{id}" hidden="true">					
 					<button type="submit" value="submit" class="btn btn-primary">Editar</button>
 					<a th:href="@{/eventos}" class="btn btn-defautl">Cancelar</a>
 				</form>

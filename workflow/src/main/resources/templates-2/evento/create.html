@@ -13,11 +13,10 @@
 				<form th:action="@{/eventos/guardar}" th:object="${evento}"
 					method="POST">
 					<input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}"> 
-					<select name="TipoEvento">
-						<option th:each="tipo : ${tipoEventos}">
+					<select th:field="*{tipoEvento}">
+						<option th:each="tipo : ${tipoEventos}" th:value="${tipo.id}">
 							<dl>
 							  <dt th:text="${tipo.nombre}">tipo evento</dt>
-							  <dd th:text="${tipo.icono}">icono evento</dd>
 							</dl>
 						</option>
 					</select>
