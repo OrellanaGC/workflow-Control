@@ -4,23 +4,27 @@
 <title layout:fragment="title">Evento</title>
 <body>
 	<a layout:fragment="titulo-vista" class="navbar-brand"
-		href="javascript:;">Crear evento</a>
+		href="javascript:;">Crear Evento</a>
 	<div layout:fragment="content">
 		<div class="card">
 			<div class="card-header"></div>
 			<div class="card-body">				
-				<form th:action="@{/eventos/guardar}" th:object="${evento}" method="POST" >
+				<form th:action="@{/eventos/guardar}" th:object="${evento}" method="POST" th:method="post" >					
 					<input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}"> 
 					<select th:field="*{tipoEvento}">
 						<option th:each="tipo : ${tipoEventos}" th:value="${tipo.id}">
-						   <dl>
-							 <dt th:text="${tipo.nombre}">tipo evento</dt>
-							 
-						   </dl>
+							<dl>
+							  <dt th:text="${tipo.nombre}">tipo evento</dt>
+							</dl>
 						</option>
-					</select>								
-					<button type="submit" value="submit" class="btn btn-primary">Crear</button>
+					</select>
+					<input type="text" placeholder="TipoEvento" name="tipoEvento" th:field="*{id}" hidden="true">					
+					<button type="submit" value="submit" class="btn btn-primary">Editar</button>
 					<a th:href="@{/eventos}" class="btn btn-defautl">Cancelar</a>
 				</form>
 			</div>
 			<div class="card-footer"></div>
+		</div>
+	</div>
+</body>
+</html>
