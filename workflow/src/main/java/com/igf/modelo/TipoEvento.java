@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author aleja
@@ -20,7 +21,7 @@ import javax.persistence.Table;
 public class TipoEvento {
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long id;	
 	private String nombre;
 	private String icono;
 	@OneToMany(mappedBy="tipoEvento")

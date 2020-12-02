@@ -25,6 +25,8 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	//Dependencia para recargar los html sin necesidad de cargar la aplicacion de nuevo
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	// https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
+	compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.1.6.Final'
 	
 	compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.0.5'
 }

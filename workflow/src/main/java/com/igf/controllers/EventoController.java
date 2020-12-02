@@ -4,6 +4,8 @@
 
 package com.igf.controllers;
 
+import javax.validation.Valid;
+
 /**
  * @author user-1
  *
@@ -11,7 +13,9 @@ package com.igf.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,14 +46,23 @@ public class EventoController {
 	@GetMapping("/crear")
 	public String create(Model model) {
 		Evento evento = new Evento();
-		model.addAttribute(evento);
+		model.addAttribute("eventos", evento);
 		model.addAttribute("tipoEventos", tipoEventoService.list());
 		return "/evento/create";
 	}
 
 	// Guardar
 	@PostMapping("/guardar")
-	public String save(Evento evento, Model model) {
+	public String save(@ModelAttribute("evento") @Valid Evento evento,BindingResult bindingResult, Model model) {
+		/*
+		if (bindingResult.hasErrors()) {			
+			model.addAttribute("evento", evento);
+			model.addAttribute("tipoEventos", tipoEventoService.list());
+			return "/evento/create";
+		}else {			
+			eventoService.save(evento);
+			return "redirect:/eventos";			
+		}*/
 		eventoService.save(evento);
 		return "redirect:/eventos";
 	}
