@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * @author aleja
  *
  */
-@Entity
+@Entity //Esto sirve para que JPA sepa que esta es una tabla de la base de datos
 @Table(name = "evento")
 public class Evento {
 	@Id

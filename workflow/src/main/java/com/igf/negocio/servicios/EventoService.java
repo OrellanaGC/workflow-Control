@@ -7,21 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.igf.modelo.Evento;
+import com.igf.modelo.TipoEvento;
 import com.igf.negocio.repositorio.EventoRepository;
 
 @Service
 public class EventoService {
-	
-	@Autowired
-	private EventoRepository eventoRepository;
-	
-	/*
+ @Autowired	
+ private EventoRepository eventoRepository;
+ 
+ 
+ /*
 	 * Metodo para guardar o actualizar 
 	 */
 	public Evento save(Evento evento) {
 		return this.eventoRepository.save(evento);
 	}
-	
+ 
 	/*
 	 * Metodo para eliminar 
 	 */
@@ -49,4 +50,5 @@ public class EventoService {
 	public boolean exists(Long id) {
 		return this.eventoRepository.existsById(id);
 	}
+
 }
