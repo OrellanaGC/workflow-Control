@@ -1,8 +1,11 @@
 package com.igf.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +39,11 @@ public class TipoEventoController {
 
 	// Guardar
 	@PostMapping("/guardar")
-	public String save(TipoEvento tipoEvento, Model model) {		
+	public String save(@Valid TipoEvento tipoEvento, BindingResult bindingResult,Model model) {
+		if(bindingResult.hasErrors()) {
+			model.addAttribute(tipoEvento);
+			return "/tipoEvento/create";
+		}
 		tipoEventoService.save(tipoEvento);
 		return "redirect:/tiposEventos";
 	}

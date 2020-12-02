@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import com.sun.istack.NotNull;
 
 /**
  * @author aleja
@@ -19,10 +22,11 @@ import javax.persistence.Table;
 public class Evento {
 	@Id
 	@GeneratedValue
-	private Long id;
-	private String nombre;
-	@ManyToOne
-	@JoinColumn(name ="id_tipo_evento", nullable = false)
+	private Long id;	
+	private String nombre;	
+	@javax.validation.constraints.NotNull
+	@ManyToOne	
+	@JoinColumn(name ="id_tipo_evento", nullable = false)	
 	private TipoEvento tipoEvento;
 	public Evento() {
 		
