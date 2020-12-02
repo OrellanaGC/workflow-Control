@@ -36,7 +36,7 @@ private TipoEventoService tipoEventoService;
 	@GetMapping("/crear")
 	public String create(Model model) {
 		Evento evento = new Evento();
-		model.addAttribute("listaEventos", tipoEventoService.list());
+		model.addAttribute("tipoEventos", tipoEventoService.list());
 		model.addAttribute(evento);
 		return "/evento/create";
 	}
@@ -45,7 +45,7 @@ private TipoEventoService tipoEventoService;
 	@PostMapping("/guardar")
 	public String save(Evento evento, Model model) {		
 		eventoService.save(evento);
-		return "redirect:/Eventos";
+		return "redirect:/eventos";
 	}
 	
 	// Vista actualizar
@@ -53,9 +53,10 @@ private TipoEventoService tipoEventoService;
 	public String edit(@PathVariable Long id, Model model) {
 		if (eventoService.find(id).isPresent()) {
 			model.addAttribute("evento", eventoService.find(id));
+			model.addAttribute("tipoEventos", tipoEventoService.list());
 			return "/evento/edit";
 		} else {
-			return "redirect:/Eventos";
+			return "redirect:/eventos";
 		}
 	}
 	
@@ -65,7 +66,7 @@ private TipoEventoService tipoEventoService;
 		if (eventoService.exists(id)) {
 			eventoService.delete(id);
 		}
-		return "redirect:/Eventos";
+		return "redirect:/eventos";
 	}
 
 
