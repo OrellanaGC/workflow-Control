@@ -22,11 +22,12 @@ import com.sun.istack.NotNull;
 public class Evento {
 	@Id
 	@GeneratedValue
-	private Long id;	
-	private String nombre;	
-	@javax.validation.constraints.NotNull
+	private Long id;
+	@NotBlank(message = "El nombre no debe estar vacio.")
+	private String nombre;
 	@ManyToOne	
 	@JoinColumn(name ="id_tipo_evento", nullable = false)	
+	@javax.validation.constraints.NotNull(message = "Se debe seleccionar un tipo de evento")
 	private TipoEvento tipoEvento;
 	public Evento() {
 		
