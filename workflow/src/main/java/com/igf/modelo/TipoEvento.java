@@ -21,8 +21,10 @@ import javax.validation.constraints.NotBlank;
 public class TipoEvento {
 	@Id
 	@GeneratedValue
-	private Long id;	
+	private Long id;
+	@NotBlank(message = "El nombre no debe estar vacio.")
 	private String nombre;
+	@NotBlank(message = "El icono no debe estar vacio.")
 	private String icono;
 	@OneToMany(mappedBy="tipoEvento")
     private Set<Evento> eventos;
