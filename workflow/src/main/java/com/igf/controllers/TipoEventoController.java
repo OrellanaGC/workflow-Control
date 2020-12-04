@@ -39,13 +39,22 @@ public class TipoEventoController {
 
 	// Guardar
 	@PostMapping("/guardar")
-	public String save(@Valid TipoEvento tipoEvento, BindingResult bindingResult,Model model) {
+	public String save(@ModelAttribute("tipoEvento")@Valid TipoEvento tipoEvento, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) {
-			model.addAttribute(tipoEvento);
-			return "/tipoEvento/create";
-		}
-		tipoEventoService.save(tipoEvento);
-		return "redirect:/tiposEventos";
+			if(tipoEvento.getId() == null) {
+				model.addAttribute("tipoEvento", tipoEvento);
+				model.addAttribute("tipoEventos", tipoEventoService.list());
+				return "/tipoEvento/create"; 
+			}else {
+				model.addAttribute("tipoEvento", tipoEvento);
+				model.addAttribute("tipoEventos", tipoEventoService.list());
+				return "/tipoEvento/edit"; 
+			}
+		}else {
+			tipoEventoService.save(tipoEvento);
+			return "redirect:/tiposEventos";			
+		}		
+	
 	}
 	
 	// Vista actualizar
