@@ -53,18 +53,15 @@ public class EventoController {
 
 	// Guardar
 	@PostMapping("/guardar")
-	public String save(@ModelAttribute("evento") @Valid Evento evento,BindingResult bindingResult, Model model) {
-		/*
+	public String save(@ModelAttribute("eventos") @Valid Evento evento,BindingResult bindingResult, Model model) {
+		
 		if (bindingResult.hasErrors()) {			
 			model.addAttribute("evento", evento);
-			model.addAttribute("tipoEventos", tipoEventoService.list());
+			model.addAttribute("tipoEventos", tipoEventoService.list());	
 			return "/evento/create";
-		}else {			
+		}		
 			eventoService.save(evento);
-			return "redirect:/eventos";			
-		}*/
-		eventoService.save(evento);
-		return "redirect:/eventos";
+			return "redirect:/eventos";	
 	}
 
 	// Vista actualizar

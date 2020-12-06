@@ -9,7 +9,10 @@
 		<div class="card">
 			<div class="card-header"></div>
 			<div class="card-body">				
-				<form th:action="@{/tiposEventos/guardar}" th:object="${tipoEventos}" method="POST" >					
+				<form th:action="@{/tiposEventos/guardar}" th:object="${tipoEvento}" method="POST" >
+				<div class = "alert alert-danger" th:if="${#fields.hasErrors('*')}">
+						<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>>
+					</div>							
 					<input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}"> 
 					<input type="text" placeholder="Icono" name="icono" th:field="*{icono}">															
 					<button type="submit" value="submit" class="btn btn-primary">Crear</button>

@@ -10,8 +10,11 @@
 		<div class="card">
 			<div class="card-header"></div>
 			<div class="card-body">
-				<form th:action="@{/eventos/guardar}" th:object="${evento}"
-					method="POST">					
+				<form th:action="@{/eventos/guardar}" th:object="${eventos}"
+					method="POST">			
+					<div class = "alert alert-danger" th:if="${#fields.hasErrors('*')}">
+						<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>>
+					</div>				
 					<input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}">				
 					 
 					<select th:field="*{tipoEvento}">
