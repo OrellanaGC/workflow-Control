@@ -10,15 +10,19 @@
 		<div class="card">
 			<div class="card-header"></div>
 			<div class="card-body">
-				<form th:action="@{/eventos/guardar}" th:object="${evento}"
-					method="POST">					
+				<form th:action="@{/eventos/guardar}" th:object="${evento}"method="POST">	
+					<div class="alert alert-danger" th:if"=${#fields.hasErrors('*')}">
+						<p th:each="err : ${#fields.errors('*')}" th:text="$(err)"></p>
+					</div>				
 					<input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}">				
 					 
 					<select th:field="*{tipoEvento}">
 						<option th:each="tipo : ${tipoEventos}" th:value="${tipo.id}">
 							<dl>
 							  <dt th:text="${tipo.nombre}">tipo evento</dt>
-							</dl>
+							</dl>	 
+							<dt th:text="${tipo.nombre}">tipo evento</dt>
+							
 						</option>
 					</select>										
 					<button type="submit" value="submit" class="btn btn-primary">Crear</button>

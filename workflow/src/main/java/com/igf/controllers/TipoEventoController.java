@@ -39,7 +39,7 @@ public class TipoEventoController {
 
 	// Guardar
 	@PostMapping("/guardar")
-	public String save(@Valid TipoEvento tipoEvento, BindingResult bindingResult,Model model) {
+	public String save(@Valid TipoEvento tipoEvento, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute(tipoEvento);
 			return "/tipoEvento/create";

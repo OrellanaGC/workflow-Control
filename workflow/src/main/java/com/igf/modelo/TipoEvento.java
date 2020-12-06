@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @author aleja
+ * 
  *
  */
 @Entity
@@ -21,8 +21,10 @@ import javax.validation.constraints.NotBlank;
 public class TipoEvento {
 	@Id
 	@GeneratedValue
-	private Long id;	
+	private Long id;
+	@NotBlank(message ="el nombre no debe estar vacia")
 	private String nombre;
+	@NotBlank(message ="el icono no debe estar vacia")
 	private String icono;
 	@OneToMany(mappedBy="tipoEvento")
     private Set<Evento> eventos;
