@@ -24,7 +24,7 @@ public class TipoEvento {
 	private Long id;
 	@NotBlank(message ="el nombre no debe estar vacia")
 	private String nombre;
-	@NotBlank(message ="el icono no debe estar vacia")
+	@NotBlank(message ="el icono no debe estar vacia")//validacion para icono
 	private String icono;
 	@OneToMany(mappedBy="tipoEvento")
     private Set<Evento> eventos;
