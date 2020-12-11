@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
-<title layout:fragment="title">Diagramas</title>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<title layout:fragment="title">subir diagrama bpmn</title>
 <body>
-	<a layout:fragment="titulo-vista" class="navbar-brand" href="javascript:;">Diagramas</a>
+	<a layout:fragment="titulo-vista" class="navbar-brand"
+		href="javascript:;">diagrama bpmn</a>
 	<div layout:fragment="content">
-		<div class="card">			
+		<div class="card">
 			<div class="card-header">
-				<button class="btn btn-primary">+ Nuevo</button>
+				<a th:href="@{/fileupload}" class="btn btn-primary">+ Nuevo</a>		
 			</div>
 			<div class="card-body">
 				<table class="table table-hover">
 					<thead>
 					  <tr>
-					    <th scope="col">Nombre</th>
-					    <th scope="col">Última modificación</th>
+					    <th scope="col">Nombre</th>					    
 					    <th scope="col">Acciones</th>
 					  </tr>
 					</thead>
 					<tbody>
-					  <tr >
-					    <td >nombre tipo de evento</td>
-					    <td >DD/MM/YY</td>
+					  <tr th:each="diagrama : ${diagramas}" >
+					    <td th:text="${diagrama.nombre}">nombre tipo de evento</td>					    
 					    <td>
-					     <button class="btn btn-info  btn-icon"><i class="nc-icon nc-settings-gear-65"></i></button>
-					     <button class="btn btn-danger btn-icon"><i class="nc-icon nc-simple-remove"></i></button>
+					     <a class="btn btn-info btn-icon"><i class="nc-icon nc-settings-gear-65"></i></a>
+					     <a class="btn btn-danger btn-icon"><i class="nc-icon nc-simple-remove"></i></a>
 					    </td>
 					  </tr>
 					</tbody>
-				</table>
+				</table>				
 			</div>
-			<div class="card-footer"><a>Paginación falsa 1 2 3 4</a></div>
+			<div class="card-footer"></div>
 		</div>
 	</div>
 </body>

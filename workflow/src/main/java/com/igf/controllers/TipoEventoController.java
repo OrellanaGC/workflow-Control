@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.igf.modelo.TipoEvento;
 import com.igf.negocio.servicios.TipoEventoService;
@@ -34,8 +34,8 @@ public class TipoEventoController {
 	@GetMapping("/crear")
 	public String create(Model model) {
 		TipoEvento tipoEvento = new TipoEvento();
-		model.addAttribute(tipoEvento);
-		return "/tipoEvento/create";
+		model.addAttribute(tipoEvento);		
+		return "/upload/uploadPage";
 	}
 
 	// Guardar
@@ -52,7 +52,7 @@ public class TipoEventoController {
 				return "/tipoEvento/edit"; 
 			}
 		}else {
-			tipoEventoService.save(tipoEvento);
+			tipoEventoService.save(tipoEvento);			
 			return "redirect:/tiposEventos";			
 		}		
 	
@@ -69,7 +69,7 @@ public class TipoEventoController {
 		}
 	}
 	
-	// Elimnar
+	// Eliminar
 	@GetMapping("/eliminar/{id}")
 	public String delete(@PathVariable Long id, Model model) {
 		if (tipoEventoService.exists(id)) {
