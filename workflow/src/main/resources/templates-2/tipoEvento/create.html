@@ -15,7 +15,7 @@
 						<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p> 
 					</div>	
 					<input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}"> 
-					<input type="text" placeholder="Icono" name="icono" th:field="*{icono}">															
+					<input type="text" placeholder="Icono" name="icono" th:field="*{icono}">																				
 					<button type="submit" value="submit" class="btn btn-primary">Crear</button>
 					<a th:href="@{/tiposEventos}" class="btn btn-defautl">Cancelar</a>
 				</form>

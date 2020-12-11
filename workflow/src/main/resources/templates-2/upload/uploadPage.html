@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<title layout:fragment="title">subir diagrama bpmn</title>
+<body>
+	<a layout:fragment="titulo-vista" class="navbar-brand"
+		href="javascript:;">diagrama bpmn</a>
+	<div layout:fragment="content">
+		<div class="card">
+			<div class="card-header">
+				<div th:if="${msg}">
+					<span th:text="${msg}"></span>
+				</div>
+			</div>
+			<div class="card-body">				
+				<form action="/fileupload" method="post" enctype="multipart/form-data">
+					<input class="form-control" type="file" name="files">
+					<input type="submit" value="Upload files" class="btn btn-primary">
+				</form>
+			</div>
+			<div class="card-footer"></div>
+		</div>
+	</div>
+</body>
+</html>
