@@ -8,14 +8,25 @@
 	<div layout:fragment="content">
 		<div class="card">
 			<div class="card-header">
-				<div th:if="${diagrama}">					
-					<p th:text="${{diagrama.nombre}}">Nombre de diagrama</p>					
+				<div th:if="${diagrama}">
+					<table class="table">
+						<tr>
+							<th>Proceso:</th>
+							<td th:text="${{diagrama.nombre}}">Nombre de diagrama</td>
+						</tr>
+						<tr>
+							<th>Elementos:</th>
+							<td></td>
+						</tr>
+						<tr th:each="elemento : ${elementos}">
+							<th></th>
+							<td th:text="${elemento}"></td>
+						</tr>
+					</table>				
 				</div>						
 			</div>
 			<div class="card-body">
-				<div th:each="elemento : ${elementos}">
-					<span th:text="${elemento}"></span>
-				</div>
+				
 			</div>
 			<div class="card-footer"></div>
 		</div>

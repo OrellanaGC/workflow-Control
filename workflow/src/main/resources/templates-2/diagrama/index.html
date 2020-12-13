@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout}">
-<title layout:fragment="title">subir diagrama bpmn</title>
+<title layout:fragment="title">Diagramas</title>
 <body>
 	<a layout:fragment="titulo-vista" class="navbar-brand"
 		href="javascript:;">diagrama bpmn</a>
@@ -22,7 +22,7 @@
 					  <tr th:each="diagrama : ${diagramas}" >
 					    <td th:text="${diagrama.nombre}">nombre tipo de evento</td>					    
 					    <td>
-					     <a class="btn btn-info btn-icon"><i class="nc-icon nc-settings-gear-65"></i></a>
+					     <a th:href="@{/diagramas/{id}(id=${diagrama.id})}" class="btn btn-info btn-icon"><i class="nc-icon nc-settings-gear-65"></i></a>
 					     <a class="btn btn-danger btn-icon"><i class="nc-icon nc-simple-remove"></i></a>
 					    </td>
 					  </tr>

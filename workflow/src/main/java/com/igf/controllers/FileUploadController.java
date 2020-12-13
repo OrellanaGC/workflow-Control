@@ -25,6 +25,7 @@ public class FileUploadController {
 	@Autowired
 	private DiagramaService diagramaService;
 	
+	
 	public static String uploadDirectory= System.getProperty("user.dir")+"/diagramas";
 	
 	@GetMapping("")
@@ -35,6 +36,7 @@ public class FileUploadController {
 	//guardar archivo
 	@PostMapping("")
 	public String uploadPageSave(Model model, @RequestParam("files") MultipartFile[] files) {
+		String id="";
 		StringBuilder filenames= new StringBuilder();
 		for(MultipartFile file : files) {
 			String nombre= file.getOriginalFilename();
@@ -62,14 +64,14 @@ public class FileUploadController {
 				Diagrama diagrama = new Diagrama();
 				diagrama.setNombre(nombre);
 				diagrama.setPathArchivo(uploadDirectory+"/"+file.getOriginalFilename());
-				diagramaService.save(diagrama);
+				id=diagramaService.save(diagrama).getId().toString();
 				
 			} catch (Exception e) {
 				e.printStackTrace();				
 			}						 
 		}
 		//model.addAttribute("msg", "Archivos subidos exitosamente: "+filenames.toString());
-		return "redirect:/diagramas";		
+		return "redirect:/diagramas/"+ id;		
 	}
 	
 }
