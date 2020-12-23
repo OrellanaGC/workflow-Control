@@ -20,9 +20,9 @@ import com.igf.negocio.repositorio.Permission_RoleRepository;
 @Service
 public class Permission_roleService {
 
-	
+	@Autowired
 private Permission_RoleRepository permission_RoleRepository;
-@Autowired
+
 	/*
 	 * Metodo para guardar o actualizar 
 	 */
