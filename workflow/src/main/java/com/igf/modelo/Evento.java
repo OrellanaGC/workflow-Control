@@ -13,18 +13,15 @@ import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 
-/**
- * @author aleja
- *
- */
 @Entity //Esto sirve para que JPA sepa que esta es una tabla de la base de datos
 @Table(name = "evento")
 public class Evento {
 	@Id
 	@GeneratedValue
-	private Long id;	
+	private Long id;
+	@NotBlank(message = "El nombre no debe estar vacio")
 	private String nombre;	
-	@javax.validation.constraints.NotNull
+	@javax.validation.constraints.NotNull(message = "Debe seleccionar el tipo de evento, si no existe, cree antes un tipo de evento")
 	@ManyToOne	
 	@JoinColumn(name ="id_tipo_evento", nullable = false)	
 	private TipoEvento tipoEvento;
