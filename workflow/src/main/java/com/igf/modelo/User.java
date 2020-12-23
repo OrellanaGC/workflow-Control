@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+
+
 @Entity 
 @Table(name = "users")
 public class User {
@@ -19,7 +21,7 @@ public class User {
 	@NotBlank(message = "No deje el campo vacio")
 	private String sexo;
 	@NotBlank(message = "Ingrese la fecha")
-	private long fecha_nac;
+	private String fecha_nac;
 	
 	public User() {}
 
@@ -55,11 +57,11 @@ public class User {
 		this.sexo = sexo;
 	}
 
-	public long getFecha_nac() {
+	public String getFecha_nac() {
 		return fecha_nac;
 	}
 
-	public void setFecha_nac(long fecha_nac) {
+	public void setFecha_nac(String fecha_nac) {
 		this.fecha_nac = fecha_nac;
 	}
 	
