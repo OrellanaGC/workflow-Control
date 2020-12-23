@@ -16,6 +16,9 @@ public class Permission_Role {
 	@ManyToOne	
 	@JoinColumn(name ="id_permission", nullable = false)	
 	private Permission permission;
+	@ManyToOne	
+	@JoinColumn(name ="id_role", nullable = false)	
+	private Role role;
 	public Permission_Role() {
 		
 	}
@@ -31,5 +34,12 @@ public class Permission_Role {
 	public void setPermission(Permission permission) {
 		this.permission = permission;
 	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
 	
 }
