@@ -1,9 +1,12 @@
 package com.igf.modelo;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -17,6 +20,8 @@ public class Diagrama {
 	private String pathArchivo;
 	@Column(unique = true)
 	private String nombre;
+	@OneToMany(mappedBy="diagrama")
+	private Set<Pool> pools;
 		
 	public Diagrama() {		
 	}
@@ -43,6 +48,12 @@ public class Diagrama {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public Set<Pool> getPools() {
+		return pools;
+	}
+	public void setPools(Set<Pool> pools) {
+		this.pools = pools;
 	}
 	
 	
