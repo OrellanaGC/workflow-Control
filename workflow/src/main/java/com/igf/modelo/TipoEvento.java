@@ -13,26 +13,16 @@ import javax.persistence.Table;
 //import javax.validation.constraints.NotBlank;//
 import javax.validation.constraints.NotBlank;
 
-/**
- * 
- *
- */
 @Entity
 @Table(name = "tipo_de_evento")
 public class TipoEvento {
 	@Id
 	@GeneratedValue
-<<<<<<< HEAD
 	private Long id;	
 	@NotBlank(message = "El nombre no debe estar vacio")
 	private String nombre;
 	@NotBlank(message = "El icono no debe estar vacio")
-=======
-	private Long id;
-	@NotBlank(message ="el nombre no debe estar vacia")
-	private String nombre;
-	@NotBlank(message ="el icono no debe estar vacia")//validacion para icono
->>>>>>> Eqiuipo1errorYvalidaciones
+	@NotBlank(message ="el icono no debe estar vacia")
 	private String icono;
 	@OneToMany(mappedBy="tipoEvento")
     private Set<Evento> eventos;
