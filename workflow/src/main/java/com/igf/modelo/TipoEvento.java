@@ -11,10 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 //import javax.validation.constraints.NotBlank;//
-<<<<<<< HEAD
-=======
+
 import javax.validation.constraints.NotBlank;
->>>>>>> Eqiuipo1errorYvalidaciones
+
 
 /**
  * 

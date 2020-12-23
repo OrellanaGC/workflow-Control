@@ -7,12 +7,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name= "permission_role")
-public class permission_role {
+public class Permission_role {
 @Id
 @GeneratedValue
 	private int id;
 
-	public permission_role() {
+	public Permission_role() {
 		
 	}
 
