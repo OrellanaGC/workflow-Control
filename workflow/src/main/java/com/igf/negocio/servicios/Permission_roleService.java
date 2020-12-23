@@ -9,9 +9,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.igf.modelo.Evento;
 import com.igf.modelo.Permission_Role;
-import com.igf.negocio.repositorio.EventoRepository;
+
 import com.igf.negocio.repositorio.Permission_RoleRepository;
 
 /**
