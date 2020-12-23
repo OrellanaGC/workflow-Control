@@ -53,22 +53,28 @@ public class EventoController {
 
 	// Guardar
 	@PostMapping("/guardar")
-	public String save(@ModelAttribute("eventos") @Valid Evento evento,BindingResult bindingResult, Model model) {
-		
-		if (bindingResult.hasErrors()) {			
-			model.addAttribute("evento", evento);
-			model.addAttribute("tipoEventos", tipoEventoService.list());	
-			return "/evento/create";
-		}		
+	public String save(@ModelAttribute("eventos") @Valid Evento evento, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			if(evento.getId() == null) {
+				model.addAttribute("eventos", evento);
+				model.addAttribute("tipoEventos", tipoEventoService.list());
+				return "/evento/create"; 
+			}else {
+				model.addAttribute("eventos", evento);
+				model.addAttribute("tipoEventos", tipoEventoService.list());
+				return "/evento/edit"; 
+			}
+		}else {
 			eventoService.save(evento);
-			return "redirect:/eventos";	
+			return "redirect:/eventos";			
+		}
 	}
 
 	// Vista actualizar
 	@GetMapping("/editar/{id}")
 	public String edit(@PathVariable Long id, Model model) {
 		if (eventoService.find(id).isPresent()) {
-			model.addAttribute("evento", eventoService.find(id));
+			model.addAttribute("eventos", eventoService.find(id));
 			model.addAttribute("tipoEventos", tipoEventoService.list());
 			return "/evento/edit";
 		} else {

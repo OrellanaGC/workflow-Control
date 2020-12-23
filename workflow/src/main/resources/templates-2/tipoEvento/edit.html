@@ -8,11 +8,17 @@
 	<div layout:fragment="content">
 		<div class="card">
 			<div class="card-header"></div>
-			<div class="card-body">				
-				<form th:action="@{/tiposEventos/guardar}" th:object="${tipoEvento}" method="POST" th:method="post" >					
-					<input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}"> 
-					<input type="text" placeholder="Icono" name="icono" th:field="*{icono}">
-					<input type="text" placeholder="Icono" name="icono" th:field="*{id}" hidden="true">					
+			<div class="card-body">
+				<form th:action="@{/tiposEventos/guardar}" th:object="${tipoEvento}"
+					method="POST" th:method="post">
+					<div class="alert alert-danger alert-dismissable"
+						th:if="${#fields.hasErrors('*')}">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+					</div>
+					<input type="text" placeholder="Nombre" name="nombre"th:field="*{nombre}"> 
+					<input type="text"placeholder="Icono" name="icono" th:field="*{icono}"> 
+					<input type="text" placeholder="Icono" name="icono" th:field="*{id}"hidden="true">
 					<button type="submit" value="submit" class="btn btn-primary">Editar</button>
 					<a th:href="@{/tiposEventos}" class="btn btn-defautl">Cancelar</a>
 				</form>

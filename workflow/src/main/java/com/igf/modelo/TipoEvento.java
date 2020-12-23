@@ -10,19 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-//import javax.validation.constraints.NotBlank;//
 import javax.validation.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "tipo_de_evento")
 public class TipoEvento {
 	@Id
 	@GeneratedValue
-	private Long id;	
-	@NotBlank(message = "El nombre no debe estar vacio")
+	private Long id;
+	@NotBlank(message = "El nombre no debe estar vacio.")
 	private String nombre;
-	@NotBlank(message = "El icono no debe estar vacio")
-	@NotBlank(message ="el icono no debe estar vacia")
+	@NotBlank(message = "El icono no debe estar vacio.")
 	private String icono;
 	@OneToMany(mappedBy="tipoEvento")
     private Set<Evento> eventos;
