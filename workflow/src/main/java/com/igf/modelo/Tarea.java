@@ -25,6 +25,9 @@ public class Tarea {
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_tarea", nullable = false)
 	private TipoTarea tipoTarea;
+	@ManyToOne
+	@JoinColumn(name = "id_pool", nullable = false)
+	private Pool pool;
 	
 	public Tarea() {
 		
@@ -61,4 +64,14 @@ public class Tarea {
 	public void setTipoTarea(TipoTarea tipoTarea) {
 		this.tipoTarea = tipoTarea;
 	}
+
+	public Pool getPool() {
+		return pool;
+	}
+
+	public void setPool(Pool pool) {
+		this.pool = pool;
+	}
+	
+	
 }

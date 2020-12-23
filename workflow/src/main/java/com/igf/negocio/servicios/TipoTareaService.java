@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.igf.modelo.TipoTarea;
 import com.igf.negocio.repositorio.TipoTareaRepository;
@@ -15,7 +16,7 @@ import com.igf.negocio.repositorio.TipoTareaRepository;
  * @author daiv05
  *
  */
-
+@Service
 public class TipoTareaService {
 	
 	@Autowired

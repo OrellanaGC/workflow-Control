@@ -29,14 +29,14 @@ public class DiagramaService {
 	}
 	
 	/*
-	 * Metodo para buscar Evento por ID
+	 * Metodo para buscar Diagrama por ID
 	 */
 	public Optional<Diagrama> find(Long id) {
 		return this.diagramaRepository.findById(id);		
 	}
 	
 	/*
-	 * Metodo para listar todos los Eventos
+	 * Metodo para listar todos los Diagramas
 	 */
 	public List<Diagrama> list(){
 		return this.diagramaRepository.findAll();		

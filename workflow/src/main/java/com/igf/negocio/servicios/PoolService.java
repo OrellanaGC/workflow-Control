@@ -17,8 +17,8 @@ public class PoolService {
 	/*
 	 * Metodo para guardar o actualizar 
 	 */
-	public Pool save(Pool diagrama) {
-		return this.poolRepository.save(diagrama);
+	public Pool save(Pool pool) {
+		return this.poolRepository.save(pool);
 	}
 	
 	/*
@@ -29,14 +29,14 @@ public class PoolService {
 	}
 	
 	/*
-	 * Metodo para buscar Evento por ID
+	 * Metodo para buscar Pool por ID
 	 */
 	public Optional<Pool> find(Long id) {
 		return this.poolRepository.findById(id);		
 	}
 	
 	/*
-	 * Metodo para listar todos los Eventos
+	 * Metodo para listar todos los Pools
 	 */
 	public List<Pool> list(){
 		return this.poolRepository.findAll();		
@@ -50,7 +50,7 @@ public class PoolService {
 	}
 	
 	/*
-	 * Metodo para listar encontrar un diagrama por su nombre
+	 * Metodo para listar encontrar un pool por su nombre
 	 */
 	public List<Pool> findBynombre(String nombre){
 		return this.poolRepository.findByNombre(nombre);
