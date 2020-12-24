@@ -3,11 +3,12 @@ package com.igf.modelo;
 
 
 import java.sql.Date;
-
+import java.util.Set;
 
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import javax.validation.constraints.NotBlank;
@@ -30,6 +31,8 @@ public class User {
 	private String sexo;
 	@NotBlank(message = "Ingrese la fecha")
 	private Date fecha_nac;
+	@OneToMany(mappedBy = "user")
+	private Set<Diagrama> diagramas;
 	
 	public User() {}
 
@@ -73,13 +76,11 @@ public class User {
 		this.fecha_nac = fecha_nac;
 	}
 
-	
-	
+	public Set<Diagrama> getDiagramas() {
+		return diagramas;
+	}
 
-	
-	
-
-	
-	
-	
+	public void setDiagramas(Set<Diagrama> diagramas) {
+		this.diagramas = diagramas;
+	}
 }

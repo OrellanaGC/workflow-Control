@@ -6,9 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "diagrama")
@@ -22,6 +23,9 @@ public class Diagrama {
 	private String nombre;
 	@OneToMany(mappedBy="diagrama")
 	private Set<Pool> pools;
+	@ManyToOne
+	@JoinColumn(name = "email_user", nullable = false)
+	private User user;
 		
 	public Diagrama() {		
 	}
@@ -54,6 +58,12 @@ public class Diagrama {
 	}
 	public void setPools(Set<Pool> pools) {
 		this.pools = pools;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

@@ -14,7 +14,10 @@ public class Role {
 	private Long id;
 	@NotBlank(message = "El nombre no debe estar vacio")
 	private String nombre;	
-	public Role() {}
+	
+	public Role() {
+		
+	}
 	public Long getId() {
 		return id;
 	}

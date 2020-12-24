@@ -31,14 +31,14 @@ public class UserService {
 	}
 	
 	/*
-	 * Metodo para buscar Evento por ID
+	 * Metodo para buscar User por ID
 	 */
 	public Optional<User> find(String email) {
 		return this.userRepository.findById(email);		
 	}
 	
 	/*
-	 * Metodo para listar todos los Eventos
+	 * Metodo para listar todos los User
 	 */
 	public List<User> list(){
 		return this.userRepository.findAll();		
