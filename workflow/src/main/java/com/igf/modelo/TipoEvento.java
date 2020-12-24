@@ -12,10 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-/**
- * @author aleja
- *
- */
+
 @Entity
 @Table(name = "tipo_de_evento")
 public class TipoEvento {
