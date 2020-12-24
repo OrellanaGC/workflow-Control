@@ -35,10 +35,20 @@ public class TipoEventoController {
 	public String create(Model model) {
 		TipoEvento tipoEvento = new TipoEvento();
 		model.addAttribute(tipoEvento);		
-		return "/upload/uploadPage";
+		return "/tipoEvento/create";
 	}
 
 	// Guardar
+		@PostMapping("/guardar")
+		public String save(@Valid TipoEvento tipoEvento, BindingResult bindingResult, Model model) {
+			if(bindingResult.hasErrors()) {
+				model.addAttribute(tipoEvento);
+				return "/tipoEvento/create";
+			}
+			tipoEventoService.save(tipoEvento);
+			return "redirect:/tiposEventos";
+		}
+	/* Guardar
 	@PostMapping("/guardar")
 	public String save(@ModelAttribute("tipoEvento")@Valid TipoEvento tipoEvento, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) {
@@ -56,7 +66,7 @@ public class TipoEventoController {
 			return "redirect:/tiposEventos";			
 		}		
 	
-	}
+	}*/
 	
 	// Vista actualizar
 	@GetMapping("/editar/{id}")
