@@ -1,18 +1,26 @@
 package com.igf.modelo;
 
+
+
+import java.sql.Date;
+
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import javax.validation.constraints.NotBlank;
 
 
 
 @Entity 
 @Table(name = "users")
+
 public class User {
+	
 	@Id
-	@GeneratedValue
+	@NotBlank(message = "debe escribir un email")
 	private String email;
 	@NotBlank(message = "El nombre no debe estar vacio")
 	private String name;
@@ -21,7 +29,7 @@ public class User {
 	@NotBlank(message = "No deje el campo vacio")
 	private String sexo;
 	@NotBlank(message = "Ingrese la fecha")
-	private String fecha_nac;
+	private Date fecha_nac;
 	
 	public User() {}
 
@@ -57,13 +65,21 @@ public class User {
 		this.sexo = sexo;
 	}
 
-	public String getFecha_nac() {
+	public Date getFecha_nac() {
 		return fecha_nac;
 	}
 
-	public void setFecha_nac(String fecha_nac) {
+	public void setFecha_nac(Date fecha_nac) {
 		this.fecha_nac = fecha_nac;
 	}
+
+	
+	
+
+	
+	
+
+	
 	
 	
 }
