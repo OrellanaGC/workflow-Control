@@ -32,14 +32,14 @@ public class Role_UserService {
 	}
 	
 	/*
-	 * Metodo para buscar Evento por ID
+	 * Metodo para buscar Role_User por ID
 	 */
 	public Optional<Role_User> find(Long id) {
 		return this.role_UserRepository.findById(id);		
 	}
 	
 	/*
-	 * Metodo para listar todos los Eventos
+	 * Metodo para listar todos los Role_User
 	 */
 	public List<Role_User> list(){
 		return this.role_UserRepository.findAll();		

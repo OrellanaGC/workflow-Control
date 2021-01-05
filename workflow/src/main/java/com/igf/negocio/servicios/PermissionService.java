@@ -21,13 +21,13 @@ import com.igf.negocio.repositorio.PermissionRepository;
 @Service
 public class PermissionService {
 	@Autowired
-private PermissionRepository permissionRepository;
+	private PermissionRepository permissionRepository;
 	
 	/*
 	 * Metodo para guardar o actualizar 
 	 */
-	public Permission save(Permission evento) {
-		return this.permissionRepository.save(evento);
+	public Permission save(Permission permission) {
+		return this.permissionRepository.save(permission);
 	}
 	
 	/*
@@ -38,14 +38,14 @@ private PermissionRepository permissionRepository;
 	}
 	
 	/*
-	 * Metodo para buscar Evento por ID
+	 * Metodo para buscar Permission por ID
 	 */
 	public Optional<Permission> find(Long id) {
 		return this.permissionRepository.findById(id);		
 	}
 	
 	/*
-	 * Metodo para listar todos los Eventos
+	 * Metodo para listar todos los Permission
 	 */
 	public List<Permission> list(){
 		return this.permissionRepository.findAll();		
