@@ -15,23 +15,62 @@
 
 
 
-
-
 		<div class="modal" id="myModal">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h4 class="modal-title">Modal Heading</h4>
+						<h4 class="modal-title"><b>Campo del formulario</b></h4>
 					</div>
-
+                     
+                     <h8>Your dashboard is the first thing you see when you log in. The JIRA software dashboard is like your car's dashboard. But
+             instead of showing your speed and fuel level, it show important information about your work-like your proyects, your activities and your issues.</h8>
+					
 					<!-- Modal body -->
-					<div class="modal-body">Modal body..</div>
+					<table class="table table-bordered table-striped table-highlight">
+                
+                <tbody>
+                    <tr>
+                        <td colspan="8" class="modal-title text-center">Table</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">Indicativo a presentar al usuario</td>
+                        <td rowspan="2">Tipo de variable</td>
+                        <td class="modal-title text-center" colspan="6">Restricciones</td>
+                    </tr>
+                    <tr>
+                        <td>Valor min</td>
+                        <td>Valor max</td>
+                        <td>Max caracteres</td>
+                        <td>Min caracteres</td>
+                        <td>Requerido</td>
+                        <td>Valor por defecto</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                                  <td>
+                                      <select class="form-control">
+                                          <option>1</option>
+                                          <option>2</option>
+                                          <option>3</option>
+                                      </select>
+                                  </td>
+                                    <td><input type="text" class="form-control" value=" "/></td>
+                                    <td><input type="text" class="form-control" value=" "/></td>
+                                    <td><input type="text" class="form-control" value=" "/></td>
+                                    <td><input type="text" class="form-control" value=" "/></td>
+                                    <td><input type="checkbox" class="form-control"/> </td>
+                                    <td><input type="text" class="form-control" value=" "/>
+                    </tr>
+                </tbody>
+            </table>
+					
 
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					<!-- Text center -->
+					<div class="text-center">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
 					</div>
 
 				</div>
