@@ -1,7 +1,38 @@
 <!DOCTYPE html>
+
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout}">
+
+
 <title layout:fragment="title">CONSULTAR</title>
+<script>
+$(window).load(function(){
+
+ $(function() {
+  $('#file-input').change(function(e) {
+      addImage(e); 
+     });
+
+     function addImage(e){
+      var file = e.target.files[0],
+      imageType = /image.*/;
+    
+      if (!file.type.match(imageType))
+       return;
+  
+      var reader = new FileReader();
+      reader.onload = fileOnload;
+      reader.readAsDataURL(file);
+     }
+  
+     function fileOnload(e) {
+      var result=e.target.result;
+      $('#imgSalida').attr("src",result);
+     }
+    });
+  });
+
+</script> 
 <body>
 	<a layout:fragment="titulo-vista" class="navbar-brand"
 		href="javascript:;"></a>
@@ -114,23 +145,20 @@
                         <br>
                          BPMN
                         <table class="table-bordered">
+
+
                         <tbody>
                         <tr>
                         <td>
                        
-                        
-                        <form action="">
-                        imagen del BPMN a modelar
-                        <br>
-                        <label for= "archivo"> seleccionar archivo</label>
-                        
-                        <input type ="file" id = "archivo"> 
-						</form>
-						
+                      <input name="file-input" id="file-input" type="file" /><br />
+   					<img id="imgSalida" width="50%" height="50%" src="" />
+								
                         </td>
                         <td><button class="btn btn-success">agregar</button>
                         <br>
                      	 <button class="btn btn-info"> cancelar </button>
+
                      	 </td>
                         </tr>
                         </tbody>
