@@ -39,7 +39,7 @@ public class EventoController {
 	@GetMapping("")
 	public String index(Model model) {
 		model.addAttribute("eventos", eventoService.list());
-		return "/diseñoestatico1/index";//return "/evento/index";
+		return "/evento/index";
 	}
 
 	// Vista Crear
