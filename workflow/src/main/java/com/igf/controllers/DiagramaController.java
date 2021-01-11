@@ -22,6 +22,7 @@ import org.xml.sax.SAXException;
 
 import com.igf.modelo.Diagrama;
 import com.igf.modelo.TipoEvento;
+import com.igf.negocio.dao.diagramaDao;
 import com.igf.negocio.servicios.DiagramaService;
 
 import antlr.collections.List;
@@ -44,8 +45,10 @@ public class DiagramaController {
 	@GetMapping("/{id}")
 	public String show(@PathVariable Long id,Model model) {
 		if(diagramaService.exists(id)) {
-			java.util.List<String> elementosa=new ArrayList<>(); 
+			ArrayList<diagramaDao> elementosa=new ArrayList<>(); 
 			Diagrama diagrama = diagramaService.find(id).get();
+			//Declaración de string para nombres de lineas;
+			String carrilPadrE="";
 			//Leer informacion del archivo xml y traerla (pool y tasks)
 			DocumentBuilderFactory factory= DocumentBuilderFactory.newInstance();
 			try {
@@ -57,11 +60,16 @@ public class DiagramaController {
 					if(nodo.getNodeType()==Node.ELEMENT_NODE) {
 						Element element= (Element) nodo;
 						String type =element.getAttribute("xmi:type");
-						if(type.endsWith("Pool") || type.endsWith("Task")) {
-							elementosa.add(element.getAttribute("name"));
-						}
-						String name= element.getAttribute("name");
-						System.out.println(type+ " "+ name+ " "+ i);
+						if(type.endsWith("Lane") || type.endsWith("Task")) {
+							diagramaDao elementoDia= new diagramaDao();
+							elementoDia.setNombre(element.getAttribute("name"));
+							if(type.endsWith("Task")) {
+								elementoDia.setLineaPadre(carrilPadrE);
+							}else {
+								carrilPadrE= elementoDia.getNombre();								
+							}
+							elementosa.add(elementoDia);
+						}						
 					}
 				}
 			} catch (ParserConfigurationException e) {
