@@ -16,6 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ConsultaBpmnController {
 	@GetMapping("")
 	public String inicio() {
-		return "/diseñoestatico1/index";
+		return "/diseñoestatico2/index";
 	}
 }
