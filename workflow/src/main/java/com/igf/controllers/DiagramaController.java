@@ -84,12 +84,13 @@ public class DiagramaController {
 			}
 			model.addAttribute("elementos",elementosa);
 			model.addAttribute("diagrama", diagrama);
+			/*
 			for (diagramaDao diagramaDao : elementosa) {
 				System.out.println(diagramaDao.getNombre());
 				System.out.println(diagramaDao.getLineaPadre());
-			}
+			}*/
 			
-			return "/diagrama/show";
+			return "/disenoestatico1/index";
 		}else {
 			return "redirect:/diagramas";
 		}
