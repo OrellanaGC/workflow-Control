@@ -26,9 +26,12 @@ public class Diagrama {
 	@ManyToOne
 	@JoinColumn(name = "email_user", nullable = false)
 	private User user;
+	private Boolean confirmado;
 		
+	//Constructor
 	public Diagrama() {		
 	}
+	//Getter y Setter
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +67,12 @@ public class Diagrama {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Boolean getConfirmado() {
+		return confirmado;
+	}
+	public void setConfirmado(Boolean confirmado) {
+		this.confirmado = confirmado;
 	}
 	
 	

@@ -90,7 +90,7 @@ public class DiagramaController {
 				System.out.println(diagramaDao.getLineaPadre());
 			}*/
 			
-			return "/disenoestatico1/index";
+			return "/diagrama/show";
 		}else {
 			return "redirect:/diagramas";
 		}
