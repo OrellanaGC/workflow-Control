@@ -83,7 +83,12 @@ public class DiagramaController {
 				e.printStackTrace();
 			}
 			model.addAttribute("elementos",elementosa);
-			model.addAttribute("diagrama", diagrama);			
+			model.addAttribute("diagrama", diagrama);
+			for (diagramaDao diagramaDao : elementosa) {
+				System.out.println(diagramaDao.getNombre());
+				System.out.println(diagramaDao.getLineaPadre());
+			}
+			
 			return "/diagrama/show";
 		}else {
 			return "redirect:/diagramas";
