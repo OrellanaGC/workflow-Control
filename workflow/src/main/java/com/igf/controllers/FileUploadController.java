@@ -76,7 +76,7 @@ public class FileUploadController {
 				Diagrama diagrama = new Diagrama();
 				diagrama.setNombre(nombre);
 				diagrama.setPathArchivo(uploadDirectory+"/"+file.getOriginalFilename());
-				User usuario= userService.find("vanessacarranza71@gmail.com").get();
+				User usuario= userService.find("alejandro@mailinator.com").get();
 				/* Prueba de manejo de fechas con springboot
 				System.out.println(usuario.toString());				
 				System.out.println(usuario.getFecha_nac());

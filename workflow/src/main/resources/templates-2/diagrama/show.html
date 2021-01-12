@@ -14,13 +14,17 @@
 							<th>Proceso:</th>
 							<td th:text="${{diagrama.nombre}}">Nombre de diagrama</td>
 						</tr>
+					</table>
+					
+					<table th:each="elementoLinea : ${elementos}" th:if="${elementoLinea.LineaPadre == null}" class="table">
+						
 						<tr>
-							<th>Elementos:</th>
-							<td></td>
+							<th>Carril:</th>
+							<td th:text="${elementoLinea.nombre}"></td>
 						</tr>
-						<tr th:each="elemento : ${elementos}">
+						<tr th:each="elementoTarea : ${elementos}" th:if="${elementoTarea.LineaPadre == elementoLinea.nombre}">
 							<th></th>
-							<td th:text="${elemento}"></td>
+							<td th:text="${elementoTarea.nombre}"></td>
 						</tr>
 					</table>				
 				</div>						
