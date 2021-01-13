@@ -22,7 +22,7 @@ import com.igf.negocio.servicios.DiagramaService;
 public class FileUploadController {
 	@Autowired	
 	private DiagramaService diagramaService;
-
+	
 	private User usuario;
 	
 	public User getUser() {
@@ -78,13 +78,15 @@ public class FileUploadController {
 				Diagrama diagrama = new Diagrama();
 				diagrama.setNombre(nombre);
 				diagrama.setPathArchivo(uploadDirectory+"/"+file.getOriginalFilename());
+				
 				/* Prueba de manejo de fechas con springboot
 				System.out.println(usuario.toString());				
 				System.out.println(usuario.getFecha_nac());
 				Date currentSqlDate = new Date(System.currentTimeMillis());
 				usuario.setFecha_nac(currentSqlDate);
 				System.out.println(usuario.getFecha_nac());*/
-				diagrama.setUser(usuario);				
+				
+				diagrama.setUser(usuario);//Asignacion del usuario de la seed al diagrama
 				id=diagramaService.save(diagrama).getId().toString();
 				
 			} catch (Exception e) {

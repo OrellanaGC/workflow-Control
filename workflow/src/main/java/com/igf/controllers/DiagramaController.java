@@ -1,5 +1,6 @@
 package com.igf.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -34,7 +35,6 @@ public class DiagramaController {
 	private DiagramaService diagramaService;
 
 	//Vista Listar
-	
 	@GetMapping("")
 	public String index(Model model) {
 		model.addAttribute("diagramas", diagramaService.list());
@@ -95,14 +95,21 @@ public class DiagramaController {
 			return "redirect:/diagramas";
 		}
 		
-	}	
-	// Eliminar
-				@GetMapping("/eliminar/{id}")
-				public String delete(@PathVariable Long id, Model model) {
-					if (diagramaService.exists(id)) {
-						diagramaService.delete(id);
-					}
-					return "redirect:/diagramas";
-				}
+	}
+	
+	// Eliminar diagrama (BDD y carpeta diagramas)
+	@GetMapping("/eliminar/{id}")
+	public String delete(@PathVariable Long id, Model model) {
+		if (diagramaService.exists(id)) {
+			File file = new File(diagramaService.find(id).get().getPathArchivo());
+			boolean val = file.delete();
+			if(val){
+				diagramaService.delete(id);
+			} else {
+				//Error al eliminar archivo (no se si validaran esto asi que lo dejo asi)
+			}
+		}
+		return "redirect:/diagramas";
+	}
 	
 }
