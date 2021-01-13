@@ -2,8 +2,10 @@ package com.igf.modelo;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,10 +22,10 @@ public class Pool {
 	private Long id;
 	@Column(unique = true)
 	private String nombre;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name ="id_diagrama", nullable = false)
 	private Diagrama diagrama;
-	@OneToMany(mappedBy = "pool")
+	@OneToMany(mappedBy="pool",cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("id ASC")
 	private Set<Tarea> tareas;
 	
