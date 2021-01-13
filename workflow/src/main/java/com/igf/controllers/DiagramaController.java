@@ -96,4 +96,13 @@ public class DiagramaController {
 		}
 		
 	}	
+	// Eliminar
+				@GetMapping("/eliminar/{id}")
+				public String delete(@PathVariable Long id, Model model) {
+					if (diagramaService.exists(id)) {
+						diagramaService.delete(id);
+					}
+					return "redirect:/diagramas";
+				}
+	
 }
