@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.sun.istack.Nullable;
+
 /**
  * @author daiv05
  *
@@ -21,10 +23,7 @@ public class Tarea {
 	@GeneratedValue
 	private Long id;
 	private String nombre;
-	private String descripcion;
-	@ManyToOne
-	@JoinColumn(name = "id_tipo_tarea", nullable = false)
-	private TipoTarea tipoTarea;
+	private String descripcion;	
 	@ManyToOne
 	@JoinColumn(name = "id_pool", nullable = false)
 	private Pool pool;
@@ -55,15 +54,7 @@ public class Tarea {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public TipoTarea getTipoTarea() {
-		return tipoTarea;
-	}
-
-	public void setTipoTarea(TipoTarea tipoTarea) {
-		this.tipoTarea = tipoTarea;
-	}
+	}	
 
 	public Pool getPool() {
 		return pool;

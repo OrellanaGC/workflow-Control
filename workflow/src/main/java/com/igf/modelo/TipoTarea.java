@@ -21,9 +21,7 @@ public class TipoTarea {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String nombre;
-	@OneToMany(mappedBy = "tipoTarea")
-	private Set<Tarea> tareas;
+	private String nombre;	
 	
 	public TipoTarea() {
 		
@@ -45,13 +43,7 @@ public class TipoTarea {
 		this.nombre = nombre;
 	}
 
-	public Set<Tarea> getTareas() {
-		return tareas;
-	}
-
-	public void setTareas(Set<Tarea> tareas) {
-		this.tareas = tareas;
-	}
+	
 	
 	
 }

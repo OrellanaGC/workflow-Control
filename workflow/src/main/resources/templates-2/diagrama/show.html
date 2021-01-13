@@ -73,26 +73,34 @@
 									</div>
 								</table>
 								<br> <br>
-								
-								<table th:if="${{diagrama.pathImagen != null}}" class="table-bordered">
-									Imagen BPMN
-									<tbody>
-										<tr>
-											<td><input name="file-input" class="custom-file-input" id="file-input" type="file" >
-												<label>Elegir imagen</label>
-											</td>
-											<td><button class="btn btn-success">agregar</button> <br>												
-										</td></tr>
-									</tbody>
-								</table>
-								<div th:if="${{diagrama.pathImagen == null}}">
+								<form action="/fileupload/image" method="post" enctype="multipart/form-data">
+									<table th:if="${{diagrama.pathImagen == null}}" >
+										Subir imagen BPMN									
+										<tbody>										
+											<tr>
+												<td>
+													<div class="custom-file">
+														<input name="image" class="custom-file-input" id="customFile" type="file" >
+														<label class="custom-file-label">Elegir imagen</label>
+													</div>													
+													<input type="number" name="idDiagrama" th:value="${{diagrama.id}}" hidden="true">
+												</td>
+												<td><button type="submit" class="btn btn-success">agregar</button> <br>												
+											</td></tr>
+										</tbody>
+									</table>
+								</form>
+								<div th:if="${{diagrama.pathImagen != null}}">
 									<p class="h5 text-center">Imagen BPMN</p>
 									<div>
-										<img th:src="@{/img/diagramasImages/DiagramaIGF-1.0.jpeg}" src="" class="img-fluid" alt="" />
+										<img th:src="@{${diagrama.pathImagen}}" class="img-fluid" alt="" />
 									</div>									
 								</div>								
-								<div  class="card-body d-flex flex-row-reverse">									
-									<button class="btn btn-info" th:if="${{diagrama.confirmado == null}}">Confirmar</button>
+								<div  class="card-body d-flex flex-row-reverse">
+									<form th:action="@{/diagramas/confirm}" th:method="post">
+										<input type="number" name="idDiagrama" th:value="${{diagrama.id}}" hidden="true">	
+										<button class="btn btn-info" type="submit" th:if="${{diagrama.confirmado != true}}">Confirmar</button>
+									</form>
 									<button class="btn btn-info" th:if="${{diagrama.confirmado == true}}"> Regresar</button>
 								</div>
 							</div>
@@ -104,3 +112,4 @@
 	</div>
 </body>
 </html>
+
