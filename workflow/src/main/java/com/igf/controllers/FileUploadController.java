@@ -38,11 +38,11 @@ public class FileUploadController {
 		return "/upload/uploadPage";
 	}
 	
-	//guardar archivo
+	//guardar archivo diagrama
 	@PostMapping("")
 	public String uploadPageSave(Model model, @RequestParam("files") MultipartFile[] files) {		
 		String id="";
-		StringBuilder filenames= new StringBuilder();
+		//StringBuilder filenames= new StringBuilder();
 		for(MultipartFile file : files) {
 			String nombre= file.getOriginalFilename();
 			//Validación de documento nulo
@@ -70,7 +70,7 @@ public class FileUploadController {
 				return "/upload/uploadPage";
 			}
 			Path filenameAndPath = Paths.get(uploadDirectory,file.getOriginalFilename());
-			filenames.append(file.getOriginalFilename());
+			//filenames.append(file.getOriginalFilename());
 			try {
 				Files.write(filenameAndPath, file.getBytes());
 				Diagrama diagrama = new Diagrama();
@@ -93,5 +93,31 @@ public class FileUploadController {
 		//model.addAttribute("msg", "Archivos subidos exitosamente: "+filenames.toString());
 		return "redirect:/diagramas/"+ id;		
 	}
-	
+	//Subida de imagen diagrama
+	@PostMapping("/image")
+	public String uploadImageSave(Model model, @RequestParam("image") MultipartFile image, @RequestParam("idDiagrama") Long id) {
+		if(image.getSize()<=0) {
+			model.addAttribute("msg", "Tiene que subir un archivo");				
+			return "/upload/uploadPage";
+		}
+		//ValidaciÃ³n de archivos mayor a 5 MB
+		if(image.getSize()>5000000) {
+			model.addAttribute("msg", "El archivo que intenta subir es superior a 5 MB");				
+			return "/upload/uploadPage";
+		}
+		String nombre= id.toString()+ image.getOriginalFilename();
+		//Traer diagrama al que se le insertara la imagen
+		Diagrama diagrama = diagramaService.find(id).get();
+		String uploadImageDirectory=System.getProperty("user.dir")+"/src/main/resources/static/img/diagramasImages" ;
+		Path filenameAndPath = Paths.get(uploadImageDirectory,nombre);
+		try {
+			Files.write(filenameAndPath, image.getBytes());			
+			diagrama.setPathImagen("/img/diagramasImages/" +nombre);
+			diagramaService.save(diagrama);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();				
+		}
+		return "redirect:/diagramas/"+ id.toString();
+	}
 }
