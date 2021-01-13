@@ -45,7 +45,7 @@ public class FileUploadController {
 		StringBuilder filenames= new StringBuilder();
 		for(MultipartFile file : files) {
 			String nombre= file.getOriginalFilename();
-			//ValidaciÃ³n de documento nulo
+			//Validación de documento nulo
 			if(file.getSize()<=0) {
 				model.addAttribute("msg", "Tiene que subir un archivo");				
 				return "/upload/uploadPage";
@@ -59,12 +59,12 @@ public class FileUploadController {
 				model.addAttribute("msg", "Este diagrama ha sido subido al sistema con interioridad");				
 				return "/upload/uploadPage";
 			}
-			//ValidaciÃ³n de archivos mayor a 5 MB
+			//Validación de archivos mayor a 5 MB
 			if(file.getSize()>5000000) {
 				model.addAttribute("msg", "El archivo que intenta subir es superior a 5 MB");				
 				return "/upload/uploadPage";
 			}			
-			//ValidaciÃ³n de archivos permitidos, xml y proc
+			//Validación de archivos permitidos, xml y proc
 			if(!file.getOriginalFilename().endsWith("xml") && !file.getOriginalFilename().endsWith("proc")) {
 				model.addAttribute("msg", "solo se permiten archivos con extension '.xml' o '.proc'");				
 				return "/upload/uploadPage";
@@ -76,7 +76,7 @@ public class FileUploadController {
 				Diagrama diagrama = new Diagrama();
 				diagrama.setNombre(nombre);
 				diagrama.setPathArchivo(uploadDirectory+"/"+file.getOriginalFilename());
-				User usuario= userService.find("alejandro@mailinator.com").get();
+				User usuario= userService.find("admin@admin.com").get();
 				/* Prueba de manejo de fechas con springboot
 				System.out.println(usuario.toString());				
 				System.out.println(usuario.getFecha_nac());
