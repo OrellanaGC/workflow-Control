@@ -103,10 +103,12 @@ public class DiagramaController {
 		if (diagramaService.exists(id)) {
 			File file = new File(diagramaService.find(id).get().getPathArchivo());
 			boolean val = file.delete();
-			if(val){
+			
+			//No se si validaran esto asi que lo dejo asi
+			if(val){ //si no hay ningun error al borrar el archivo, borramos de la base de datos
 				diagramaService.delete(id);
 			} else {
-				//Error al eliminar archivo (no se si validaran esto asi que lo dejo asi)
+				//Error al eliminar archivo
 			}
 		}
 		return "redirect:/diagramas";
