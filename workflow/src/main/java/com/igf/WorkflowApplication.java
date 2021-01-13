@@ -20,8 +20,6 @@ import com.igf.negocio.servicios.UserService;
 public class WorkflowApplication {
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private FileUploadController fileUploadController;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WorkflowApplication.class, args);
@@ -43,9 +41,6 @@ public class WorkflowApplication {
 			Date date = new Date(System.currentTimeMillis());
 			user.setFecha_nac(date);
 			userService.save(user);
-			fileUploadController.setUser(user);
-		} else {
-			fileUploadController.setUser(userService.find("admin@admin").get());
 		}
 	}
 
