@@ -1,35 +1,115 @@
 <!DOCTYPE html>
+
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout}">
-<title layout:fragment="title">Consulta bpmn</title>
+
+
+<title layout:fragment="title">CONSULTAR</title>
+<script type="text/javascript">
+	$(window).load(function() {
+
+		$(function() {
+			$('#file-input').change(function(e) {
+				addImage(e);
+			});
+
+			function addImage(e) {
+				var file = e.target.files[0], imageType = /image.*/;
+
+				if (!file.type.match(imageType))
+					return;
+
+				var reader = new FileReader();
+				reader.onload = fileOnload;
+				reader.readAsDataURL(file);
+			}
+
+			function fileOnload(e) {
+				var result = e.target.result;
+				$('#imgSalida').attr("src", result);
+			}
+		});
+	});
+</script>
 <body>
 	<a layout:fragment="titulo-vista" class="navbar-brand"
-		href="javascript:;">consulta bpmn</a>
+		href="javascript:;"></a>
 	<div layout:fragment="content">
-		<div class="card">
-			<div class="card-header">
-				<div th:if="${diagrama}">
-					<table class="table">
-						<tr>
-							<th>Proceso:</th>
-							<td th:text="${{diagrama.nombre}}">Nombre de diagrama</td>
-						</tr>
-						<tr>
-							<th>Elementos:</th>
-							<td></td>
-						</tr>
-						<tr th:each="elemento : ${elementos}">
-							<th></th>
-							<td th:text="${elemento}"></td>
-						</tr>
-					</table>				
-				</div>						
+		<h4 th:text="${{diagrama.nombre}}"
+			class="text-center font-weight-bold">CONSULTAR BPMN Arreglado</h4>
+		<div class="main-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header"></div>
+							<div class="card-body">
+								<table th:each="elementoLinea : ${elementos}"
+									th:if="${elementoLinea.LineaPadre == null}"
+									class="table table-bordered">
+									<div class="d-flex justify-content-center">
+										<h3 th:text="${elementoLinea.nombre}" class="&gt;text-center">carril
+											X</h3>
+										<thead class="thead-light">
+											<tr>
+												<th>Tareas</th>
+												<th th:if="${{diagrama.confirmado== true}}">Acciones de
+													formulario</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="elementoTarea : ${elementos}"
+												th:if="${elementoTarea.LineaPadre == elementoLinea.nombre}">
+												<td th:text="${elementoTarea.nombre}" class="col-12">texto2</td>
+												<td th:if="${{diagrama.confirmado== true}}">
+													<div class="card-body d-flex">
+														<button class="btn btn-success btn-sm ml-auto">crear</button>
+														<button class="btn btn-info">editar</button>
+														<button class="btn btn-danger">eliminar</button>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</div>
+								</table>
+								<br> <br>
+								<form action="/fileupload/image" method="post" enctype="multipart/form-data">
+									<table th:if="${{diagrama.pathImagen == null}}" >
+										Subir imagen BPMN									
+										<tbody>										
+											<tr>
+												<td>
+													<div class="custom-file">
+														<input name="image" class="custom-file-input" id="customFile" type="file" >
+														<label class="custom-file-label">Elegir imagen</label>
+													</div>													
+													<input type="number" name="idDiagrama" th:value="${{diagrama.id}}" hidden="true">
+												</td>
+												<td><button type="submit" class="btn btn-success">agregar</button> <br>												
+											</td></tr>
+										</tbody>
+									</table>
+								</form>
+								<div th:if="${{diagrama.pathImagen != null}}">
+									<p class="h5 text-center">Imagen BPMN</p>
+									<div>
+										<img th:src="@{${diagrama.pathImagen}}" class="img-fluid" alt="" />
+									</div>									
+								</div>								
+								<div  class="card-body d-flex flex-row-reverse">
+									<form th:action="@{/diagramas/confirm}" th:method="post">
+										<input type="number" name="idDiagrama" th:value="${{diagrama.id}}" hidden="true">	
+										<button class="btn btn-info" type="submit" th:if="${{diagrama.confirmado != true}}">Confirmar</button>
+									</form>
+									<button class="btn btn-info" th:if="${{diagrama.confirmado == true}}"> Regresar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="card-body">
-				
-			</div>
-			<div class="card-footer"></div>
 		</div>
 	</div>
 </body>
 </html>
+

@@ -29,7 +29,7 @@ public class User {
 	private String password;
 	@NotBlank(message = "No deje el campo vacio")
 	private String sexo;
-	@NotBlank(message = "Ingrese la fecha")
+	@javax.validation.constraints.NotNull(message = "Debe ingresar una fecha")
 	private Date fecha_nac;
 	@OneToMany(mappedBy = "user")
 	private Set<Diagrama> diagramas;

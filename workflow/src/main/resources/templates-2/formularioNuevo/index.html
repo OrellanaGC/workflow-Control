@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<title layout:fragment="title">Formulario</title>
+
+<body>
+	<a layout:fragment="titulo-vista" class="navbar-brand" href="javascript:;"></a>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<h4 class="text-center font-weight-bold">Formulario Nuevo</h4>
+			<div align="right">
+				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">+ Agregar campo</button>
+			</div>
+			<div class="row">
+	          <div class="col-lg-12">
+	            <div class="card ">
+	            
+	            <!-- CARD HEADER -->
+	              <div class="card-header ">
+	              	
+	              </div>
+	            <!-- FIN CARD HEADER -->
+	            
+	            <!-- CARD BODY -->
+	              <div class="card-body ">
+	                <br> <br>
+					<!-- SECCION DESCRIPCION DEL FORMULARIO--->
+					<div class="row">
+						<div class="col-lg-1"></div>
+						<div class="col-lg-2">
+							<br>
+							Descripcion del
+							<br>
+							formulario:
+						</div>
+						<div class="col-lg-8">
+							<div class="form-group">
+								<textarea class="form-control" id="textDescripcion" rows="4"  style="border: 1px solid #cecece;"></textarea>
+							</div>
+						</div>
+						<div class="col-lg-1"></div>
+					</div>
+					<br>
+					<br>
+					<!-- -------------SECCION DE LOS 2 SELECTS-------------- -->
+					<div class="row">
+						<div class="col-lg d-flex justify-content-around mb-3">
+							<form class="form-inline justify-content-center align-items-center">
+								<div class="my-1 mr-2">Tipo de formulario:</div>
+								<select class="form-control my-1 mr-2">
+									<option selected>Eliga una opcion</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</form>
+	
+							<form class="form-inline justify-content-center align-items-center">
+								<div class="my-1 mr-2">Tarea a visualizar resumen:</div>
+								<select class="form-control my-1 mr-2">
+									<option selected>Eliga una opcion</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</form>
+						</div>	
+					</div>
+		
+					<br>
+					
+					<!-- -----------------TABLA---------------- -->
+					
+					<div class="row">
+						<div class="col-lg" style="margin-left: 50px; margin-right: 50px; overflow: auto;">
+							<table class="table table-responsive-xl table-bordered">
+								<thead align="center" valign="middle" style="text-transform: uppercase; font-weight: bold; background-color: #EEFFF8;">
+									<tr>
+										<td colspan="8">table</td>
+									</tr>
+									<tr>
+										<td rowspan="2">indicativo a presentar<br> al usuario</td>
+										<td rowspan="2">tipo de la variable</td>
+										<td colspan="6">restricciones</td>
+									</tr>
+									<tr> 
+										<td>valor min</td>
+										<td>valor max</td>
+										<td>max caracteres</td>
+										<td>min caracteres</td>
+										<td>requerido</td>
+										<td>valor por default</td>
+									</tr>
+								</thead>
+								<tbody align="center" valign="middle">
+									<tr>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td> 
+											 <input type="checkbox" id="checkbox1">
+										</td>
+										<td><div>text</div></td>
+									</tr>
+									<tr>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td> 
+											 <input type="checkbox" id="checkbox2">
+										</td>
+										<td><div>text</div></td>
+									</tr>
+									<tr>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td>text</td>
+										<td> 
+											 <input type="checkbox" id="checkbox3">
+										</td>
+										<td>text</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<br>
+					<div align="right" style="margin-right: 45px;">
+						<button type="button" class="btn btn-secondary">Previsualizacion de<br>formulario</button>
+					</div>
+		              </div> <!-- FIN CARD BODY -->
+		              <div class="card-footer">
+		                <hr style="margin-top: 10px;">
+						<div class="button-group" align="right" style="margin-right: 45px; margin-top: 25px;">
+							<button type="button" class="btn btn-danger">Cancelar</button>
+							<button type="button" class="btn btn-secondary" style="margin-left: 20px;" >Guardar formulario</button>
+							<br><br>
+						</div>
+		              </div>
+		            </div>
+		          </div>
+		        </div> 
+			<!-- FIN CARD -->
+		</div> 
+		
+		
+		
+		<!-- ------------------------MODAL------------------------ -->
+		
+		<div class="modal" id="myModal">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+				
+					<!-- HEADER -->
+					<div class="modal-header">
+						<div class="row">
+						<div style="margin-left: 50px; margin-right: 50px">
+							<h4 class="modal-tittle">Campo del formulario</h4>
+							<p>Your dashboard is the first thing you see when you log in. The JIRA software 
+							dashboard is like your car's dashboard. Butinstead of showing your speed and fuel level, it show 
+							important information about your work-like your proyects, your activities and your issues.</p>
+						</div>
+						</div>
+					</div>
+					
+					<!-- BODY -->
+					<div class="modal-body" style="margin-left: 20px; margin-right: 20px; overflow: auto;">
+						<table class="table table-bordered">
+							<thead align="center" valign="middle" style="text-transform: uppercase; font-weight: bold; background-color: #EEFFF8;">
+								<tr>
+									<td colspan="8">table</td>
+								</tr>
+								<tr>
+									<td rowspan="2">indicativo a presentar<br> al usuario</td>
+									<td rowspan="2">tipo de la variable</td>
+									<td colspan="6">restricciones</td>
+								</tr>
+								<tr> 
+									<td>valor min</td>
+									<td>valor max</td>
+									<td>max caracteres</td>
+									<td>min caracteres</td>
+									<td>requerido</td>
+									<td>valor por default</td>
+								</tr>
+							</thead>
+							<tbody align="center" valign="middle">
+								<tr>
+									<td><input type="text" class="form-control" id="indicativo"></td>
+									<td>
+										<select class="form-control my-1 mr-2">
+											<option selected>Eliga una opcion</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+										</select>
+									</td>
+									<td><input type="text" class="form-control" id="valMin"></td>
+									<td><input type="text" class="form-control" id="valMax"></td>
+									<td><input type="text" class="form-control" id="maxCar"></td>
+									<td><input type="text" class="form-control" id="maxMin"></td>
+									<td> 
+										 <input type="checkbox" id="checkRequired">
+									</td>
+									<td><input type="text" class="form-control" id="default"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- FOOTER -->
+					<div class="modal-footer" style="justify-content: center;">
+						<button type="submit" class="btn btn-primary">Add</button>
+                       	<button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-left: 10px;">Cancel</button>
+					</div>
+					
+
+				</div>
+			</div>
+		</div>
+		
+		
+		
+	</div>
+
+</body>
+
+</html>
+
