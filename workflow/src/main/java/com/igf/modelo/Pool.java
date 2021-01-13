@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +24,7 @@ public class Pool {
 	@JoinColumn(name ="id_diagrama", nullable = false)
 	private Diagrama diagrama;
 	@OneToMany(mappedBy = "pool")
+	@OrderBy("id ASC")
 	private Set<Tarea> tareas;
 	
 	public Pool() {

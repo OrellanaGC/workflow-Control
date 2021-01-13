@@ -22,8 +22,13 @@
 					  <tr th:each="diagrama : ${diagramas}" >
 					    <td th:text="${diagrama.nombre}">nombre tipo de evento</td>					    
 					    <td>
-					     <a th:href="@{/diagramas/{id}(id=${diagrama.id})}" class="btn btn-info btn-icon"><i class="nc-icon nc-settings-gear-65"></i></a>
-					     <a class="btn btn-danger btn-icon"><i class="nc-icon nc-simple-remove"></i></a>
+					    
+					     <a th:href="@{/diagramas/{id}(id=${diagrama.id})}" class="btn btn-info btn-icon">
+					     	<i class="nc-icon nc-settings-gear-65"></i>
+					     </a>
+					     <a th:onclick="eliminar([[${diagrama.id}]], '/diagramas/eliminar/', '/diagramas')" class="btn btn-danger btn-icon">
+					     	<i class="nc-icon nc-simple-remove"></i>
+					     </a>
 					    </td>
 					  </tr>
 					</tbody>

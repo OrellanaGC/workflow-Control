@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -22,13 +23,17 @@ public class Diagrama {
 	@Column(unique = true)
 	private String nombre;
 	@OneToMany(mappedBy="diagrama")
+	@OrderBy("id ASC")
 	private Set<Pool> pools;
 	@ManyToOne
 	@JoinColumn(name = "email_user", nullable = false)
 	private User user;
+	private Boolean confirmado;
 		
+	//Constructor
 	public Diagrama() {		
 	}
+	//Getter y Setter
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +69,12 @@ public class Diagrama {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Boolean getConfirmado() {
+		return confirmado;
+	}
+	public void setConfirmado(Boolean confirmado) {
+		this.confirmado = confirmado;
 	}
 	
 	

@@ -29,12 +29,16 @@
 								</dl>
 							</td>
 							
-							<td><a th:href="@{/eventos/editar/{id}(id=${evento.id})}"
-								class="btn btn-info btn-icon"><i
-									class="nc-icon nc-settings-gear-65"></i></a> <a
-								th:onclick="eliminar([[${evento.id}]], '/eventos/eliminar/', '/eventos')"
-								class="btn btn-danger btn-icon"><i
-									class="nc-icon nc-simple-remove"></i></a></td>
+							<td>
+							
+							<a th:href="@{/eventos/editar/{id}(id=${evento.id})}" class="btn btn-info btn-icon">
+								<i class="nc-icon nc-settings-gear-65"></i>
+							</a> 
+							<a th:onclick="eliminar([[${evento.id}]], '/eventos/eliminar/', '/eventos')" class="btn btn-danger btn-icon">
+								<i class="nc-icon nc-simple-remove"></i>
+							</a>
+							
+							</td>
 						</tr>
 					</tbody>
 				</table>
