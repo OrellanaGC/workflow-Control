@@ -78,10 +78,7 @@
 										Subir imagen BPMN				
 										<tbody>										
 											<tr>
-												<td>
-													<div th:if="${msj}">
-														<span >th:text="${msj}"></span>
-													</div>													
+												<td>												
 													<div class="custom-file">
 														<input name="image" class="custom-file-input" id="customFile" type="file" >
 														<label class="custom-file-label">Elegir imagen</label>
@@ -105,7 +102,7 @@
 										<input type="number" name="idDiagrama" th:value="${{diagrama.id}}" hidden="true">	
 										<button class="btn btn-info" type="submit" th:if="${{diagrama.confirmado != true}}">Confirmar</button>
 									</form>
-									<button class="btn btn-info" th:if="${{diagrama.confirmado == true}}"> Regresar</button>
+										<a class="btn btn-info" th:href="@{/diagramas}" th:if="${{diagrama.confirmado == true}}">Regresar</a>
 								</div>
 							</div>
 						</div>
