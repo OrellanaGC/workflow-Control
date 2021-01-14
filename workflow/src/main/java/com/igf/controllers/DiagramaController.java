@@ -16,6 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -124,6 +125,7 @@ public class DiagramaController {
 			}*/		
 			model.addAttribute("elementos",elementosa);
 			model.addAttribute("diagrama", diagrama);
+			
 			return "/diagrama/show";
 		}else {
 			return "redirect:/diagramas";
@@ -136,50 +138,58 @@ public class DiagramaController {
 		System.out.println(diagrama.getId());
 		System.out.println(id);
 		System.out.println(diagrama.getConfirmado());
-		if(diagrama.getConfirmado()==null || diagrama.getConfirmado()==false) {			
-			//Leer informacion del archivo xml y traerla (pool y tasks)
-			DocumentBuilderFactory factory= DocumentBuilderFactory.newInstance();
-			try {
-				DocumentBuilder builder = factory.newDocumentBuilder();				
-				Document doc= builder.parse(diagrama.getPathArchivo());
-				NodeList elementos = doc.getElementsByTagName("elements");
-				Pool poolPadre= new Pool();
-				for (int i = 0; i < elementos.getLength(); i++) {
-					Node nodo = elementos.item(i);
-					if(nodo.getNodeType()==Node.ELEMENT_NODE) {
-						Element element= (Element) nodo;
-						String type =element.getAttribute("xmi:type");
-						if(type.endsWith("Lane") || type.endsWith("Task")) {
-							if(type.endsWith("Task")) {
-								Tarea tarea= new Tarea();
-								tarea.setNombre(element.getAttribute("name"));
-								tarea.setPool(poolPadre);
-								tareaService.save(tarea);
-							}else {
-								Pool pool = new Pool();
-								pool.setDiagrama(diagrama);
-								pool.setNombre(element.getAttribute("name"));								
-								poolPadre= poolService.save(pool);
-							}							
-						}						
-					}
-				}
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			diagrama.setConfirmado(true);
-			diagramaService.save(diagrama);
-			return "redirect:/diagramas/"+ id.toString();
+		if(diagrama.getPathImagen() == null) {
+			model.addAttribute("diagrama", diagrama);
+			model.addAttribute("msj", "Debe subir una imagen");
+			return "redirect:/diagramas/"+ id;
 		}else {
-			return "redirect:/diagramas";
+			if(diagrama.getConfirmado()==null || diagrama.getConfirmado()==false) {			
+				//Leer informacion del archivo xml y traerla (pool y tasks)
+				DocumentBuilderFactory factory= DocumentBuilderFactory.newInstance();
+				try {
+					DocumentBuilder builder = factory.newDocumentBuilder();				
+					Document doc= builder.parse(diagrama.getPathArchivo());
+					NodeList elementos = doc.getElementsByTagName("elements");
+					Pool poolPadre= new Pool();
+					for (int i = 0; i < elementos.getLength(); i++) {
+						Node nodo = elementos.item(i);
+						if(nodo.getNodeType()==Node.ELEMENT_NODE) {
+							Element element= (Element) nodo;
+							String type =element.getAttribute("xmi:type");
+							if(type.endsWith("Lane") || type.endsWith("Task")) {
+								if(type.endsWith("Task")) {
+									Tarea tarea= new Tarea();
+									tarea.setNombre(element.getAttribute("name"));
+									tarea.setPool(poolPadre);
+									tareaService.save(tarea);
+								}else {
+									Pool pool = new Pool();
+									pool.setDiagrama(diagrama);
+									pool.setNombre(element.getAttribute("name"));								
+									poolPadre= poolService.save(pool);
+								}							
+							}						
+						}
+					}
+				} catch (ParserConfigurationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SAXException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				diagrama.setConfirmado(true);
+				diagramaService.save(diagrama);
+				return "redirect:/diagramas/"+ id.toString();
+			}else {
+				return "redirect:/diagramas";
+			}
 		}
+		
 		
 	}	
 	// Eliminar diagrama (BDD y carpeta diagramas)

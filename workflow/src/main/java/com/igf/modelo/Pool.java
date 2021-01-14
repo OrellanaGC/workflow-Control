@@ -14,6 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "pool")
 public class Pool {
@@ -22,10 +26,11 @@ public class Pool {
 	private Long id;
 	@Column(unique = true)
 	private String nombre;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name ="id_diagrama", nullable = false)
 	private Diagrama diagrama;
-	@OneToMany(mappedBy="pool",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy="pool")
 	@OrderBy("id ASC")
 	private Set<Tarea> tareas;
 	

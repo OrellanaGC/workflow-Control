@@ -75,19 +75,23 @@
 								<br> <br>
 								<form action="/fileupload/image" method="post" enctype="multipart/form-data">
 									<table th:if="${{diagrama.pathImagen == null}}" >
-										Subir imagen BPMN									
+										Subir imagen BPMN				
 										<tbody>										
 											<tr>
 												<td>
+													<div th:if="${msj}">
+														<span >th:text="${msj}"></span>
+													</div>													
 													<div class="custom-file">
 														<input name="image" class="custom-file-input" id="customFile" type="file" >
 														<label class="custom-file-label">Elegir imagen</label>
 													</div>													
 													<input type="number" name="idDiagrama" th:value="${{diagrama.id}}" hidden="true">
 												</td>
-												<td><button type="submit" class="btn btn-success">agregar</button> <br>												
-											</td></tr>
-										</tbody>
+													<td><button type="submit" class="btn btn-success">agregar</button> <br>												
+												</td>
+											</tr>
+										</tbody>	
 									</table>
 								</form>
 								<div th:if="${{diagrama.pathImagen != null}}">
