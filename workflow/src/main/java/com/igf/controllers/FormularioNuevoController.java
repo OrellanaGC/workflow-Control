@@ -113,6 +113,15 @@ public class FormularioNuevoController {
 	public DetalleVariable find(@PathVariable Long id) {
 		return detalleVariableService.find(id).get();	
 	}
+	// Eliminar detalle-variable
+		@GetMapping("/eliminar/{id}")
+		public String delete(@PathVariable Long id, Model model) {
+			if (detalleVariableService.exists(id)) {
+				detalleVariableService.delete(id);
+			}
+			return "redirect:/formulario";
+		}
+	
 }
 
 
