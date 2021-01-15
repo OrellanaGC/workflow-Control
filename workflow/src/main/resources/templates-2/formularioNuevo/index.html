@@ -6,9 +6,9 @@
 	<a layout:fragment="titulo-vista" class="navbar-brand" href="javascript:;"></a>
 	<div layout:fragment="content">
 		<div class="container-fluid">
-			<h4 class="text-center font-weight-bold">Formulario Nuevo</h4>
+			<h4 th:text="${{tarea.nombre}}" class="text-center font-weight-bold">Formulario Nuevo</h4>
 			<div align="right">
-				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">+ Agregar campo</button>
+				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalVariable">+ Agregar campo</button>
 			</div>
 			<div class="row">
 	          <div class="col-lg-12">
@@ -26,22 +26,27 @@
 					<!-- SECCION DESCRIPCION DEL FORMULARIO--->
 					<div class="row">
 						<div class="col-lg-1"></div>
-						<div class="col-lg-2">
-							<br>
-							Descripcion del
-							<br>
-							formulario:
-						</div>
-						<div class="col-lg-8">
-							<div class="form-group">
-								<textarea class="form-control" id="textDescripcion" rows="4"  style="border: 1px solid #cecece;"></textarea>
+						<div class="col-lg-4">											
+							Descripcion del formulario:
+						</div>					
+					</div>
+					<form th:action="@{/formulario/descripcion}" th:method="post">
+						<div class="row">
+							<div class="col-lg-1"></div>
+							<div class="col-lg-8">
+								<div class="form-group">
+									<textarea  name="descripcion" th:text="${{tarea.descripcion}}" class="form-control" rows="6" id="textDescripcion" maxlength="255"  style="border: 1px solid #cecece; max-height:120px"></textarea>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<input type="number" name="idTarea" th:value="${{tarea.id}}" hidden="true">
+								<button class="btn btn-primary"> Guardar</button>
 							</div>
 						</div>
-						<div class="col-lg-1"></div>
-					</div>
+					</form>
 					<br>
 					<br>
-					<!-- -------------SECCION DE LOS 2 SELECTS-------------- -->
+					<!-- -------------SECCION DE LOS 2 SELECTS-------------- --
 					<div class="row">
 						<div class="col-lg d-flex justify-content-around mb-3">
 							<form class="form-inline justify-content-center align-items-center">
@@ -79,59 +84,20 @@
 							<table class="table table-responsive-xl table-bordered">
 								<thead align="center" valign="middle" style="text-transform: uppercase; font-weight: bold; background-color: #EEFFF8;">
 									<tr>
-										<td colspan="8">table</td>
+										<td colspan="8">Campos del formulario</td>
 									</tr>
 									<tr>
-										<td rowspan="2">indicativo a presentar<br> al usuario</td>
-										<td rowspan="2">tipo de la variable</td>
-										<td colspan="6">restricciones</td>
-									</tr>
-									<tr> 
-										<td>valor min</td>
-										<td>valor max</td>
-										<td>max caracteres</td>
-										<td>min caracteres</td>
-										<td>requerido</td>
-										<td>valor por default</td>
-									</tr>
-								</thead>
+										<td style="width: 50%">Nombre de variable</td>
+										<td>tipo de variable</td>
+										<td>Detalles de variable</td>
+									</tr>									
+								</thead>								
 								<tbody align="center" valign="middle">
-									<tr>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td> 
-											 <input type="checkbox" id="checkbox1">
-										</td>
-										<td><div>text</div></td>
-									</tr>
-									<tr>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td> 
-											 <input type="checkbox" id="checkbox2">
-										</td>
-										<td><div>text</div></td>
-									</tr>
-									<tr>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td>text</td>
-										<td> 
-											 <input type="checkbox" id="checkbox3">
-										</td>
-										<td>text</td>
-									</tr>
+									<tr th:each="variable : ${tarea.detalleVariables}">
+										<td th:text="${variable.nombreVariable}">text</td>
+										<td th:text="${variable.tipoVariable}">text</td>
+										<td>text</td>										
+									</tr>									
 								</tbody>
 							</table>
 						</div>
@@ -144,8 +110,8 @@
 		              <div class="card-footer">
 		                <hr style="margin-top: 10px;">
 						<div class="button-group" align="right" style="margin-right: 45px; margin-top: 25px;">
-							<button type="button" class="btn btn-danger">Cancelar</button>
-							<button type="button" class="btn btn-secondary" style="margin-left: 20px;" >Guardar formulario</button>
+							<button type="button" class="btn btn-danger">Regresar</button>
+							<button type="button" class="btn btn-secondary" style="margin-left: 20px;" >Ejecutar Formulario</button>
 							<br><br>
 						</div>
 		              </div>
@@ -159,7 +125,7 @@
 		
 		<!-- ------------------------MODAL------------------------ -->
 		
-		<div class="modal" id="myModal">
+		<div class="modal" id="modalVariable">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 				
@@ -174,60 +140,63 @@
 						</div>
 						</div>
 					</div>
-					
+					<form th:action="@{/formulario/variable}" method="post">
 					<!-- BODY -->
 					<div class="modal-body" style="margin-left: 20px; margin-right: 20px; overflow: auto;">
-						<table class="table table-bordered">
+						<select class="form-control my-1 mr-2" id="variableSelect"  name="tipoVar" onchange="modalVariableO()">
+										<option>Tipo de variable:</option>
+										<option>Input Text</option>
+										<option>Text Area</option>
+										<option>CheckBox</option>
+										<option>RadioCheck</option>
+										<option>Email</option>
+										<option>Numero</option>
+										<option>Select</option>
+										<!--  <option>Fecha</option>-->
+						</select>					
+					
+						<table class="table table-bordered" style="display: none;" id="tableVariable">
 							<thead align="center" valign="middle" style="text-transform: uppercase; font-weight: bold; background-color: #EEFFF8;">
 								<tr>
-									<td colspan="8">table</td>
+									<td colspan="12">table</td>
 								</tr>
 								<tr>
-									<td rowspan="2">indicativo a presentar<br> al usuario</td>
-									<td rowspan="2">tipo de la variable</td>
+									<td rowspan="2" co>Nombre de variable</td>									
 									<td colspan="6">restricciones</td>
 								</tr>
 								<tr> 
-									<td>valor min</td>
-									<td>valor max</td>
-									<td>max caracteres</td>
-									<td>min caracteres</td>
-									<td>requerido</td>
-									<td>valor por default</td>
+									<td class="minval">valor min</td>
+									<td class="maxval">valor max</td>
+									<td class="maxcar">max caracteres</td>
+									<td class="mincar">min caracteres</td>									
+									<td class="required">requerido</td>									
 								</tr>
 							</thead>
 							<tbody align="center" valign="middle">
 								<tr>
-									<td><input type="text" class="form-control" id="indicativo"></td>
-									<td>
-										<select class="form-control my-1 mr-2">
-											<option selected>Eliga una opcion</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
+									<td><input type="text" required="Obligatorio" class="form-control" name="nombrevariable"></td>									
+									<td class="minval"><input type="number" class="form-control" name="minval"></td>
+									<td class="maxval"><input type="number" class="form-control" name="maxval"></td>
+									<td class="maxcar"><input type="number" class="form-control" name="maxcar"></td>
+									<td class="mincar"><input type="number" class="form-control" name="mincar"></td>									
+									<td class="required"> 
+										 <input type="checkbox" name="required">
 									</td>
-									<td><input type="text" class="form-control" id="valMin"></td>
-									<td><input type="text" class="form-control" id="valMax"></td>
-									<td><input type="text" class="form-control" id="maxCar"></td>
-									<td><input type="text" class="form-control" id="maxMin"></td>
-									<td> 
-										 <input type="checkbox" id="checkRequired">
-									</td>
-									<td><input type="text" class="form-control" id="default"></td>
+									<input type="number" name="idTarea" th:value="${{tarea.id}}" hidden="true">							
 								</tr>
 							</tbody>
 						</table>
-					</div>
+						<div style="display: none" id="displayOpciones">
+							<label for="opcionesVariable">Opciones: Escriba las opciones separadas por una coma y sin espacio despues de la coma.</label>
+							<input type="text" class="form-control" name="opciones" id="opcionesVariable">
+						</div>
+					</div>					
 					<!-- FOOTER -->
 					<div class="modal-footer" style="justify-content: center;">
-						<button type="submit" class="btn btn-primary">Add</button>
-                       	<button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-left: 10px;">Cancel</button>
+						<button type="submit" id="GuardarVariable" class="btn btn-primary" style="display: none;">Guardar</button>
+                       	<button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-left: 10px;">Cancelar</button>
 					</div>
-					
-
+					</form>
 				</div>
 			</div>
 		</div>

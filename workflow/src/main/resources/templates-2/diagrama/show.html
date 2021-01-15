@@ -62,10 +62,9 @@
 												th:if="${elementoTarea.LineaPadre == elementoLinea.nombre}">
 												<td th:text="${elementoTarea.nombre}" class="col-12">texto2</td>
 												<td th:if="${{diagrama.confirmado== true}}">
-													<div class="card-body d-flex">
-														<button class="btn btn-success btn-sm ml-auto">crear</button>
-														<button class="btn btn-info">editar</button>
-														<button class="btn btn-danger">eliminar</button>
+													<div class="card-body d-flex">														
+														<a th:if="${elementoTarea.descripcion == null}" th:href="@{/formulario/{id}(id=${elementoTarea.id})}" class="btn btn-success ">Crear</a>
+														<a th:if="${elementoTarea.descripcion != null}" th:href="@{/formulario/{id}(id=${elementoTarea.id})}" class="btn btn-info ">Editar</a>																												
 													</div>
 												</td>
 											</tr>
@@ -99,7 +98,7 @@
 								<div  class="card-body d-flex flex-row-reverse">
 									<form th:action="@{/diagramas/confirm}" th:method="post">
 										<input type="number" name="idDiagrama" th:value="${{diagrama.id}}" hidden="true">	
-										<button class="btn btn-info" type="submit" th:if="${{diagrama.confirmado != true}}">Confirmar</button>
+										<button class="btn btn-info" type="submit" th:if="${{diagrama.confirmado != true && diagrama.pathImagen != null}}">Confirmar</button>
 									</form>
 									<button class="btn btn-info" th:if="${{diagrama.confirmado == true}}"> Regresar</button>
 								</div>

@@ -34,4 +34,49 @@ $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
+//Funcion para modal de variables de formulario
+function modalVariableO(){
+	let eleccion = document.getElementById("variableSelect")	
+	let boton=document.getElementById('GuardarVariable');	
+	let tabla= document.getElementById('tableVariable');
+ 	tabla.style.display = "table";
+ 	let minvalue= document.getElementsByClassName("minval");
+ 	let maxvalue= document.getElementsByClassName("maxval");
+ 	let maxcar= document.getElementsByClassName("maxcar");
+ 	let mincar= document.getElementsByClassName("mincar");
+ 	let requerido= document.getElementsByClassName("required");
+ 	let opciones= document.getElementById("displayOpciones");
+ 	 	
+ 	if(eleccion.value == "Input Text" || eleccion.value =="Text Area" || eleccion.value =="Email"){
+ 		for(i=0; i<2; i++){
+ 			minvalue[i].style.display="none";
+ 			maxvalue[i].style.display="none";
+ 			maxcar[i].style.display="table-cell";
+ 			mincar[i].style.display="table-cell";
+ 			requerido[i].style.display="table-cell"; 			
+ 		}
+ 		opciones.style.display="none";
+ 	}
+ 	if(eleccion.value == "CheckBox" || eleccion.value == "RadioCheck" || eleccion.value == "Select"){
+ 		for(i=0; i<2; i++){
+ 			maxcar[i].style.display="none";
+ 			mincar[i].style.display="none"; 			
+ 			minvalue[i].style.display="none";
+ 			maxvalue[i].style.display="none";
+ 			requerido[i].style.display="table-cell";
+ 		}
+ 		opciones.style.display="block";
+ 	}
+ 	if(eleccion.value == "Numero"){
+ 		for(i=0; i<2; i++){
+ 			maxcar[i].style.display="none";
+ 			mincar[i].style.display="none";
+ 			requerido[i].style.display="table-cell";
+ 			minvalue[i].style.display="table-cell";
+ 			maxvalue[i].style.display="table-cell";
+ 		}
+ 		opciones.style.display="none";
+ 	} 	
+ 	boton.style.display="block";
+}
 

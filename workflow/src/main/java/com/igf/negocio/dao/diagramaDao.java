@@ -3,6 +3,8 @@ package com.igf.negocio.dao;
 public class diagramaDao {
 	private String nombre;	
 	private String LineaPadre;
+	private Long id;
+	private String descripcion;
 	
 	//Constructor
 	public diagramaDao() {				
@@ -21,7 +23,18 @@ public class diagramaDao {
 	public void setLineaPadre(String lineaPadre) {
 		LineaPadre = lineaPadre;
 	}
-	
-	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }
