@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<title layout:fragment="title">Formulario</title>
+
+<body>
+	<a layout:fragment="titulo-vista" class="navbar-brand" href="javascript:;"></a>
+	<div layout:fragment="content"> 
+		<div class="container-fluid"> 
+					
+			<div class="row">
+				<div style="margin-left: 50px; margin-right: 50px">
+					<h4 class="modal-tittle">Campo del formulario</h4>
+					<p>Your dashboard is the first thing you see when you log in. The JIRA software 
+					dashboard is like your car's dashboard. Butinstead of showing your speed and fuel level, it show 
+					important information about your work-like your proyects, your activities and your issues.</p>
+				</div>
+			</div>
+			<form th:action="@{/formulario/variable}" method="post">
+			<div style="margin-left: 20px; margin-right: 20px; overflow: auto;">
+				<select class="form-control my-1 mr-2" id="variableSelect"  name="tipoVar">
+								<option>Tipo de variable:</option>
+								<option>Input Text</option>
+								<option>Text Area</option>
+								<option>CheckBox</option>
+								<option>RadioCheck</option>
+								<option>Email</option>
+								<option>Numero</option>
+								<option>Select</option>
+								<!--  <option>Fecha</option>-->
+				</select>					
+			
+				<table class="table table-bordered" style="display: none;" id="tableVariable">
+					<thead align="center" valign="middle" style="text-transform: uppercase; font-weight: bold; background-color: #EEFFF8;">
+						<tr>
+							<td colspan="12">table</td>
+						</tr>
+						<tr>
+							<td rowspan="2" co>Nombre de variable</td>									
+							<td colspan="6">restricciones</td>
+						</tr>
+						<tr> 
+							<td class="minval">valor min</td>
+							<td class="maxval">valor max</td>
+							<td class="maxcar">max caracteres</td>
+							<td class="mincar">min caracteres</td>									
+							<td class="required">requerido</td>									
+						</tr>
+					</thead>
+					<tbody align="center" valign="middle">
+						<tr>
+							<td><input type="text" required="Obligatorio" class="form-control" name="nombrevariable"></td>									
+							<td class="minval"><input type="number" class="form-control" name="minval"></td>
+							<td class="maxval"><input type="number" class="form-control" name="maxval"></td>
+							<td class="maxcar"><input type="number" class="form-control" name="maxcar"></td>
+							<td class="mincar"><input type="number" class="form-control" name="mincar"></td>									
+							<td class="required"> 
+								 <input type="checkbox" name="required">
+							</td>
+							<input type="number" name="idTarea" th:value="${{id}}" hidden="true">
+						</tr>
+					</tbody>
+				</table>
+				<div style="display: none" id="displayOpciones">
+					<label for="opcionesVariable">Opciones: Escriba las opciones separadas por una coma y sin espacio despues de la coma.</label>
+					<input type="text" class="form-control" name="opciones" id="opcionesVariable">
+				</div>
+			</div>					
+
+			<button type="submit" id="GuardarVariable" class="btn btn-primary" style="display: none;">Guardar</button>
+               <button type="button" class="btn btn-danger" style="margin-left: 10px;">Cancelar</button>
+			</form>
+			
+			
+			</div>
+		</div>
+</body>
+</html>

@@ -122,6 +122,16 @@ public class FormularioNuevoController {
 			return "redirect:/formulario";
 		}
 	
+	
+	//
+	@GetMapping("/editar/{idTarea}")
+	public String editar(Model model, @PathVariable Long id){
+		if(tareaService.exists(id)) {
+			Tarea tarea = tareaService.find(id).get();
+			model.addAttribute("idTarea", tarea);
+		}
+		return "/formularioNuevo/edit";
+	}
 }
 
 

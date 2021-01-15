@@ -97,8 +97,7 @@
 										<td th:text="${variable.nombreVariable}">text</td>
 										<td th:text="${variable.tipoVariable}">text</td>
 										<td>																					
-											<a class="btn btn-info " 
-											th:attr="onclick=|modalVariable1('${{variable}}')|">Editar</a>
+											<a class="btn btn-info" th:href ="@{/formulario/editar/{idTarea}(idTarea=${variable.id})}" th:method="GET">Editar</a>
 											 
 											<a th:onclick="eliminar([[${variable.id}]], '/formulario/eliminar/', '/formulario/6')" class="btn btn-danger ">Eliminar</a>
 										</td>										
