@@ -16,6 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -124,6 +125,7 @@ public class DiagramaController {
 			}*/		
 			model.addAttribute("elementos",elementosa);
 			model.addAttribute("diagrama", diagrama);
+			
 			return "/diagrama/show";
 		}else {
 			return "redirect:/diagramas";
@@ -174,12 +176,14 @@ public class DiagramaController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			diagrama.setConfirmado(true);
 			diagramaService.save(diagrama);
 			return "redirect:/diagramas/"+ id.toString();
 		}else {
 			return "redirect:/diagramas";
 		}
+		
 		
 	}	
 	// Eliminar diagrama (BDD y carpeta diagramas)
