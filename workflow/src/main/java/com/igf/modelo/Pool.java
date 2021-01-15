@@ -2,8 +2,10 @@ package com.igf.modelo;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,6 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "pool")
@@ -23,7 +29,8 @@ public class Pool {
 	@ManyToOne
 	@JoinColumn(name ="id_diagrama", nullable = false)
 	private Diagrama diagrama;
-	@OneToMany(mappedBy = "pool")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy="pool")
 	@OrderBy("id ASC")
 	private Set<Tarea> tareas;
 	
