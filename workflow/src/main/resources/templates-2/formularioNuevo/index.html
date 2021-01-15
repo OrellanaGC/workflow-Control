@@ -8,7 +8,7 @@
 		<div class="container-fluid">
 			<h4 th:text="${{tarea.nombre}}" class="text-center font-weight-bold">Formulario Nuevo</h4>
 			<div align="right">
-				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalVariable">+ Agregar campo</button>
+				<button th:if="${{tarea.descripcion != null}}" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalVariable">+ Agregar campo</button>
 			</div>
 			<div class="row">
 	          <div class="col-lg-12">
@@ -89,14 +89,19 @@
 									<tr>
 										<td style="width: 50%">Nombre de variable</td>
 										<td>tipo de variable</td>
-										<td>Detalles de variable</td>
+										<td>Acciones de variable</td>
 									</tr>									
 								</thead>								
 								<tbody align="center" valign="middle">
 									<tr th:each="variable : ${tarea.detalleVariables}">
 										<td th:text="${variable.nombreVariable}">text</td>
 										<td th:text="${variable.tipoVariable}">text</td>
-										<td>text</td>										
+										<td>																					
+											<a class="btn btn-info " 
+											th:attr="onclick=|modalVariable1('${{variable}}')|">Editar</a>
+											 
+											<a th:href="@{/formulario/findDetalle/(id=${variable.id})}"  class="btn btn-danger ">Eliminar</a>
+										</td>										
 									</tr>									
 								</tbody>
 							</table>
@@ -104,7 +109,8 @@
 					</div>
 					<br>
 					<div align="right" style="margin-right: 45px;">
-						<button type="button" class="btn btn-secondary">Previsualizacion de<br>formulario</button>
+						<button th:if="${{tarea.cambios == true}}" type="button" class="btn btn-secondary">Previsualizacion de<br>formulario</button>
+						<button th:if="${{tarea.cambios != true && tarea.descripcion!=null && not #lists.isEmpty(tarea.detalleVariables)}}" type="button" class="btn btn-secondary">Generar formulario</button>
 					</div>
 		              </div> <!-- FIN CARD BODY -->
 		              <div class="card-footer">

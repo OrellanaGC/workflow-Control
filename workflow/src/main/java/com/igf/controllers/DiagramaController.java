@@ -114,7 +114,7 @@ public class DiagramaController {
 						elementoDia2.setLineaPadre(elementoDia.getNombre());
 						elementoDia2.setNombre(tarea.getNombre());
 						elementoDia2.setId(tarea.getId());
-						elementoDia2.setDescripcion(tarea.getDescripcion());
+						elementoDia2.setDescripcion(tarea.getDescripcion());						
 						elementosa.add(elementoDia2);						
 					}					
 				}				

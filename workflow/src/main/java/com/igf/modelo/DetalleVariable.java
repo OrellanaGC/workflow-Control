@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class DetalleVariable {
@@ -25,7 +29,9 @@ public class DetalleVariable {
 	@ManyToOne
 	@JoinColumn(name = "id_tarea")
 	private Tarea tarea;
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy = "detalleVariable")
+	@OrderBy("id ASC")
 	private Set<OpcionesVariable> opcionesVariables;
 	
 	

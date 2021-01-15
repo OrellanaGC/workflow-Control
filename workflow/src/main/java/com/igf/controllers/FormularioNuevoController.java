@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.expression.Lists;
 
 import com.igf.modelo.DetalleVariable;
@@ -104,6 +105,13 @@ public class FormularioNuevoController {
 			tareaService.save(tarea);
 		}
 		return "redirect:/formulario/"+id.toString();
+	}
+	
+	//Traer un detalle tarea
+	@GetMapping("/findDetalle/{id}")
+	@ResponseBody
+	public DetalleVariable find(@PathVariable Long id) {
+		return detalleVariableService.find(id).get();	
 	}
 }
 

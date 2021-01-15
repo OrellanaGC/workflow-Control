@@ -31,9 +31,11 @@ public class Tarea {
 	private Long id;
 	private String nombre;
 	private String descripcion;	
+	private boolean cambios;
 	@ManyToOne
 	@JoinColumn(name = "id_pool", nullable = false)
 	private Pool pool;
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy = "tarea")
 	@OrderBy("id ASC")
 	private Set<DetalleVariable> detalleVariables;
@@ -80,6 +82,14 @@ public class Tarea {
 
 	public void setDetalleVariables(Set<DetalleVariable> detalleVariables) {
 		this.detalleVariables = detalleVariables;
+	}
+
+	public boolean isCambios() {
+		return cambios;
+	}
+
+	public void setCambios(boolean cambios) {
+		this.cambios = cambios;
 	}
 	
 	
