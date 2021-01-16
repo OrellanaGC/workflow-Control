@@ -36,17 +36,17 @@ $(".custom-file-input").on("change", function() {
 });
 //Funcion para modal de variables de formulario
 function modalVariableO() {
-	let eleccion = document.getElementById("variableSelect")
+	let eleccion = document.getElementById("variableSelect")	
 	let boton = document.getElementById('GuardarVariable');
 	let tabla = document.getElementById('tableVariable');
 	tabla.style.display = "table";
+	let nombreVar= document.getElementById("nombreVariable");
 	let minvalue = document.getElementsByClassName("minval");
 	let maxvalue = document.getElementsByClassName("maxval");
 	let maxcar = document.getElementsByClassName("maxcar");
 	let mincar = document.getElementsByClassName("mincar");
 	let requerido = document.getElementsByClassName("required");
 	let opciones = document.getElementById("displayOpciones");
-
 	if (eleccion.value == "Input Text" || eleccion.value == "Text Area" || eleccion.value == "Email") {
 		for (i = 0; i < 2; i++) {
 			minvalue[i].style.display = "none";
@@ -76,7 +76,9 @@ function modalVariableO() {
 			maxvalue[i].style.display = "table-cell";
 		}
 		opciones.style.display = "none";
-	}
+	}	
+	opciones.value=null;
+	nombreVar.value=null;	
 	boton.style.display  = "block";
 }
 
@@ -84,14 +86,53 @@ function modalVariableO() {
 function modalVariable1(variable) {
 	var url = '/formulario/findDetalle/' + variable;
 	$.get(url, function(data ) {
-		console.log(data);
-		console.log(data.opcionesVariables);
-		console.log(data.opcionesVariables[0].nombre);
+		let eleccion = document.getElementById("variableSelect")
+		eleccion.value= data.tipoVariable;
+		modalVariableO();
+		let idVariable= document.getElementById("idVariable");
+		let nombreVar= document.getElementById("nombreVariable");		
+		let minvalue = document.getElementById("minval");
+		let maxvalue = document.getElementById("maxval");
+		let maxcar = document.getElementById("maxcar");
+		let mincar = document.getElementById("mincar");
+		let requerido = document.getElementById("required");
+		let opciones = document.getElementById("opcionesVariable");
+		idVariable.value=data.id;
+		nombreVar.value=data.nombreVariable;
+		minvalue.value= data.minimo;
+		maxvalue.value= data.maximo;
+		maxcar.value= data.maxCaracter;
+		mincar.value= data.minCaracter;
+		if(data.requerido===true){
+			requerido.checked=true;
+		}else{
+			requerido.checked=false;
+		}
+		var opcionesVariable="";
+		data.opcionesVariables.forEach(element => opcionesVariable+= element.nombre+",");
+		opciones.value= opcionesVariable;		
+		
+		eleccion.style.display= "none";
+		//console.log(data);
+		//console.log(idVariable.value);
+		//console.log(data.opcionesVariables);
+		//console.log(data.opcionesVariables[0].nombre);
 	})
   .fail(function(data) {
     console.log(data);
     console.log(data.responseText.id);
   })
   
+}
+
+function abrirmodal(){
+	let tabla = document.getElementById('tableVariable');
+	tabla.style.display = "none";
+	let eleccion = document.getElementById("variableSelect");
+	eleccion.style.display= "block";
+	let opciones = document.getElementById("displayOpciones");
+	opciones.style.display="none";
+	let idVariable= document.getElementById("idVariable");
+	idVariable.value=null;
 }
 

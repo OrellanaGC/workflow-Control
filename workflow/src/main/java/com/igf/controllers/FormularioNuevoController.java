@@ -61,10 +61,19 @@ public class FormularioNuevoController {
 	public String descripcionSave(Model model, @RequestParam("idTarea") Long id, @RequestParam("maxval") Integer maxval,
 			@RequestParam("minval") Integer minval, @RequestParam("maxcar") Integer maxcar, @RequestParam("mincar") Integer mincar,
 			@RequestParam(value = "required", required = false) String required, @RequestParam("nombrevariable") String nombre,
-			@RequestParam("tipoVar") String tipoVariable, @RequestParam("opciones") String opciones) {
+			@RequestParam("tipoVar") String tipoVariable, @RequestParam("opciones") String opciones, @RequestParam("idVariable") Long idVariable) {
 		if(tareaService.exists(id)) {
 			Tarea tarea = tareaService.find(id).get();
-			DetalleVariable detalleVariable = new DetalleVariable();
+			DetalleVariable detalleVariable;			
+			if(idVariable!=null) {
+				detalleVariable= detalleVariableService.find(idVariable).get();
+				for (OpcionesVariable opcion : detalleVariable.getOpcionesVariables()) {
+					opcionesVariableService.delete(opcion.getId());					
+				}
+				detalleVariable.setOpcionesVariables(null);
+			}else {
+				detalleVariable = new DetalleVariable();				
+			}			
 			if(maxval!= null) {
 				detalleVariable.setMaximo(maxval);
 			}
@@ -79,11 +88,29 @@ public class FormularioNuevoController {
 			}
 			if(required!=null) {
 				detalleVariable.setRequerido(true);
+			}else {
+				detalleVariable.setRequerido(false);
 			}
+			if(tipoVariable.equals("Input Text") || tipoVariable.equals("Text Area") || tipoVariable.equals("Email")) {
+				detalleVariable.setMaximo(null);
+				detalleVariable.setMinimo(null);				
+				opciones=null;
+			}
+			if(tipoVariable.equals("Numero")) {				
+				detalleVariable.setMaxCaracter(null);
+				detalleVariable.setMinCaracter(null);
+				opciones=null;
+			}
+			if(tipoVariable.equals("CheckBox") || tipoVariable.equals("RadioCheck") || tipoVariable.equals("Select")) {
+				detalleVariable.setMaximo(null);
+				detalleVariable.setMinimo(null);
+				detalleVariable.setMaxCaracter(null);
+				detalleVariable.setMinCaracter(null);
+			}				
 			detalleVariable.setNombreVariable(nombre);
 			detalleVariable.setTipoVariable(tipoVariable);
 			detalleVariable.setTarea(tarea);
-			DetalleVariable detalleGuardado= detalleVariableService.save(detalleVariable);
+			DetalleVariable detalleGuardado= detalleVariableService.save(detalleVariable);					
 			if(opciones!=null && !opciones.isEmpty()) {
 				List<String> opcionesList= Arrays.asList(opciones.split(","));
 				for (String string : opcionesList) {

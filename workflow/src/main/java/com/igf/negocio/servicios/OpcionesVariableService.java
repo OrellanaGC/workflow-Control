@@ -47,7 +47,6 @@ public class OpcionesVariableService {
 	 * Metodo para saber si el registro existe en la base de datos
 	 */
 	public boolean exists(Long id) {
-		return this.opcionesVariableRepository.existsById(id);
+		return this.opcionesVariableRepository.existsById(id);		
 	}
-
 }

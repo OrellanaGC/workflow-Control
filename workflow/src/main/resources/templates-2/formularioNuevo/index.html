@@ -8,7 +8,8 @@
 		<div class="container-fluid">
 			<h4 th:text="${{tarea.nombre}}" class="text-center font-weight-bold">Formulario Nuevo</h4>
 			<div align="right">
-				<button th:if="${{tarea.descripcion != null}}" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalVariable">+ Agregar campo</button>
+				<button th:if="${{tarea.descripcion != null}}" type="button" class="btn btn-secondary" data-toggle="modal" 
+				onclick="abrirmodal()" data-target="#modalVariable">+ Agregar campo</button>
 			</div>
 			<div class="row">
 	          <div class="col-lg-12">
@@ -97,9 +98,8 @@
 										<td th:text="${variable.nombreVariable}">text</td>
 										<td th:text="${variable.tipoVariable}">text</td>
 										<td>																					
-											<a class="btn btn-info " 
-											th:attr="onclick=|modalVariable1('${{variable}}')|">Editar</a>
-											 
+											<a class="btn btn-info " data-toggle="modal" data-target="#modalVariable" 
+											th:attr="onclick=|modalVariable1('${{variable}}')|">Editar</a>											 
 											<a th:href="@{/formulario/findDetalle/(id=${variable.id})}"  class="btn btn-danger ">Eliminar</a>
 										</td>										
 									</tr>									
@@ -183,15 +183,16 @@
 							</thead>
 							<tbody align="center" valign="middle">
 								<tr>
-									<td><input type="text" required="Obligatorio" class="form-control" name="nombrevariable"></td>									
-									<td class="minval"><input type="number" class="form-control" name="minval"></td>
-									<td class="maxval"><input type="number" class="form-control" name="maxval"></td>
-									<td class="maxcar"><input type="number" class="form-control" name="maxcar"></td>
-									<td class="mincar"><input type="number" class="form-control" name="mincar"></td>									
+									<td><input type="text" required="Obligatorio" class="form-control" name="nombrevariable" id="nombreVariable"></td>									
+									<td class="minval"><input type="number" class="form-control" name="minval" id="minval"></td>
+									<td class="maxval"><input type="number" class="form-control" name="maxval" id="maxval"></td>
+									<td class="maxcar"><input type="number" class="form-control" name="maxcar" id="maxcar"></td>
+									<td class="mincar"><input type="number" class="form-control" name="mincar" id="mincar"></td>									
 									<td class="required"> 
-										 <input type="checkbox" name="required">
+										 <input type="checkbox" name="required" id="required">
 									</td>
-									<input type="number" name="idTarea" th:value="${{tarea.id}}" hidden="true">							
+									<input type="number" name="idTarea" th:value="${{tarea.id}}" hidden="true">
+									<input type="number" name="idVariable" id="idVariable" value="" hidden="true">							
 								</tr>
 							</tbody>
 						</table>
