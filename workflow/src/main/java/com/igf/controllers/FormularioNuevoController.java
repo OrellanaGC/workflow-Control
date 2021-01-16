@@ -5,6 +5,7 @@ package com.igf.controllers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.io.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -83,7 +84,7 @@ public class FormularioNuevoController {
 			detalleVariable.setTipoVariable(tipoVariable);
 			detalleVariable.setTarea(tarea);
 			DetalleVariable detalleGuardado= detalleVariableService.save(detalleVariable);
-			if(opciones!=null) {
+			if(opciones!=null && !opciones.isEmpty()) {
 				List<String> opcionesList= Arrays.asList(opciones.split(","));
 				for (String string : opcionesList) {
 					OpcionesVariable opcionesV = new OpcionesVariable();
@@ -111,8 +112,34 @@ public class FormularioNuevoController {
 	@GetMapping("/findDetalle/{id}")
 	@ResponseBody
 	public DetalleVariable find(@PathVariable Long id) {
-		return detalleVariableService.find(id).get();	
+		DetalleVariable detalleVariable= detalleVariableService.find(id).get();
+		detalleVariable.getTarea().setPool(null);
+		detalleVariable.getTarea().setDetalleVariables(null);
+		 detalleVariable.getOpcionesVariables();
+		for (OpcionesVariable opcion : detalleVariable.getOpcionesVariables()) {
+			opcion.setDetalleVariable(null);
+		}
+		return detalleVariable;
 	}
+	
+	@GetMapping("/generar")
+	public String generarFormulario(Model model, @RequestParam("idTarea") Long id) {
+		try {
+			BufferedWriter bw= new BufferedWriter(new FileWriter("/home/aleml98-mint/Desktop/copoy.blade.html"));			
+			BufferedReader br= new BufferedReader(new FileReader("/home/aleml98-mint/Documents/Proyectos y entornos/workflow-laravel/resources/views/Formularios/form1.blade.php"));
+			String s;
+			while ((s= br.readLine())!= null) {
+				bw.write(s+"\n");
+			}
+			br.close();
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/formulario/"+id.toString();
+	}
+	
 	// Eliminar detalle-variable
 		@GetMapping("/eliminar/{id}")
 		public String delete(@PathVariable Long id, Model model) {

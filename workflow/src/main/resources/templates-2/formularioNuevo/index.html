@@ -110,7 +110,10 @@
 					<br>
 					<div align="right" style="margin-right: 45px;">
 						<button th:if="${{tarea.cambios == true}}" type="button" class="btn btn-secondary">Previsualizacion de<br>formulario</button>
-						<button th:if="${{tarea.cambios != true && tarea.descripcion!=null && not #lists.isEmpty(tarea.detalleVariables)}}" type="button" class="btn btn-secondary">Generar formulario</button>
+						<form th:action="@{/formulario/generar}" th:method="GET">
+							<input type="number" name="idTarea" th:value="${{tarea.id}}" hidden="true">
+							<button th:if="${{tarea.cambios != true && tarea.descripcion!=null && not #lists.isEmpty(tarea.detalleVariables)}}" type="submit" class="btn btn-secondary">Generar formulario</button>
+						</form>
 					</div>
 		              </div> <!-- FIN CARD BODY -->
 		              <div class="card-footer">

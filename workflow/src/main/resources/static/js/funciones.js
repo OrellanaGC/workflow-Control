@@ -90,7 +90,9 @@ function modalVariableO() {
 function modalVariable1(variable) {
 	var url = '/formulario/findDetalle/' + variable;
 	$.get(url, function(data ) {
-		alert("Load was performed.");
+		console.log(data);
+		console.log(data.opcionesVariables);
+		console.log(data.opcionesVariables[0].nombre);
 	})
   .fail(function(data) {
     console.log(data);
