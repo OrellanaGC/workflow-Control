@@ -1,4 +1,4 @@
-function eliminar(id, urleliminar, urlfinal) {
+function eliminar(id, urleliminar, urlfinal, idtarea) {
 	Swal.fire({
 		title: '¿Estas seguro de eliminar?',
 		text: "No se podra deshacer esta acción!",
@@ -22,7 +22,13 @@ function eliminar(id, urleliminar, urlfinal) {
 				'success'
 			).then((ok) => {
 				if (ok) {
-				location.href = urlfinal;
+				if(idtarea!=null){
+					location.href=urlfinal+idtarea;
+				}
+				else{
+					location.href = urlfinal;
+				}
+				
 			}
 		});
 }
@@ -92,4 +98,3 @@ function modalVariable1(variable) {
   })
   
 }
-
