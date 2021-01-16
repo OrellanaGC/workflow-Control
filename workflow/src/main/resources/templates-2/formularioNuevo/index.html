@@ -96,11 +96,11 @@
 									<tr th:each="variable : ${tarea.detalleVariables}">
 										<td th:text="${variable.nombreVariable}">text</td>
 										<td th:text="${variable.tipoVariable}">text</td>
-										<td>																					
-											<a class="btn btn-info " 
-											th:attr="onclick=|modalVariable1('${{variable}}')|">Editar</a>
+										<td>				
+											<!-- EDITAR INCOMPLETO -->																	
+											<a class="btn btn-info" th:href ="@{/formulario/editar/{idTarea}(idTarea=${variable.id})}" th:method="GET">Editar</a>
 											 
-											<a th:href="@{/formulario/findDetalle/(id=${variable.id})}"  class="btn btn-danger ">Eliminar</a>
+											<a th:onclick="eliminar([[${variable.id}]], '/formulario/eliminar/', '/formulario/',[[${{tarea.id}}]])" class="btn btn-danger">Eliminar</a> 
 										</td>										
 									</tr>									
 								</tbody>
@@ -119,7 +119,7 @@
 		              <div class="card-footer">
 		                <hr style="margin-top: 10px;">
 						<div class="button-group" align="right" style="margin-right: 45px; margin-top: 25px;">
-							<button type="button" class="btn btn-danger">Regresar</button>
+							<a class="btn btn-danger" href="javascript:history.go(-1)">Regresar</a>
 							<button type="button" class="btn btn-secondary" style="margin-left: 20px;" >Ejecutar Formulario</button>
 							<br><br>
 						</div>

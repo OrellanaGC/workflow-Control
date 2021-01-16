@@ -140,6 +140,25 @@ public class FormularioNuevoController {
 		return "redirect:/formulario/"+id.toString();
 	}
 	
+	// Eliminar detalle-variable
+		@GetMapping("/eliminar/{id}")
+		public String delete(@PathVariable Long id, Model model) {
+			if (detalleVariableService.exists(id)) {
+				detalleVariableService.delete(id);
+			}
+			return "redirect:/formulario";
+		}
+	
+	
+	//Editar campo de una tarea INCOMPLETO
+	@GetMapping("/editar/{idTarea}")
+	public String editar(Model model, @PathVariable("idTarea") Long id){
+		if(tareaService.exists(id)) {
+			Tarea tarea = tareaService.find(id).get();
+			model.addAttribute("idTarea", tarea);
+		}
+		return "/formularioNuevo/edit";
+	}
 }
 
 
