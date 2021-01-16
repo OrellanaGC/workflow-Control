@@ -123,9 +123,9 @@ public class FormularioNuevoController {
 		}
 	
 	
-	//
+	//Editar campo de una tarea INCOMPLETO
 	@GetMapping("/editar/{idTarea}")
-	public String editar(Model model, @PathVariable Long id){
+	public String editar(Model model, @PathVariable("idTarea") Long id){
 		if(tareaService.exists(id)) {
 			Tarea tarea = tareaService.find(id).get();
 			model.addAttribute("idTarea", tarea);
