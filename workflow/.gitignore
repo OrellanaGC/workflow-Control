@@ -1,10 +1,13 @@
 HELP.md
 .gradle
-diagramas
+!diagramas
+diagramas/**
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
-/src/main/resources/static/img/diagramasImages
+!/src/main/resources/static/img/diagramasImages
+/src/main/resources/static/img/diagramasImages/**
+
 !**/src/test/**/build/
 application.yaml
 ### STS ###

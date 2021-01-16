@@ -99,8 +99,7 @@ public class DiagramaController {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}				
-				
+				}	
 			}else {
 				Set<Pool> carriles =  diagrama.getPools();				
 				for (Pool pool : carriles) {
@@ -113,7 +112,9 @@ public class DiagramaController {
 						//System.out.println("tarea: "+tarea.getId()+ " " +tarea.getNombre());
 						diagramaDao elementoDia2= new diagramaDao();
 						elementoDia2.setLineaPadre(elementoDia.getNombre());
-						elementoDia2.setNombre(tarea.getNombre());						
+						elementoDia2.setNombre(tarea.getNombre());
+						elementoDia2.setId(tarea.getId());
+						elementoDia2.setDescripcion(tarea.getDescripcion());						
 						elementosa.add(elementoDia2);						
 					}					
 				}				
