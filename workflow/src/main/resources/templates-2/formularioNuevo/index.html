@@ -100,7 +100,8 @@
 										<td>																					
 											<a class="btn btn-info " data-toggle="modal" data-target="#modalVariable" 
 											th:attr="onclick=|modalVariable1('${{variable}}')|">Editar</a>											 
-											<a th:href="@{/formulario/findDetalle/(id=${variable.id})}"  class="btn btn-danger ">Eliminar</a>
+											<a th:onclick="eliminar([[${variable.id}]], '/formulario/eliminar/', '/formulario/',[[${{tarea.id}}]])" class="btn btn-danger">Eliminar</a>
+
 										</td>										
 									</tr>									
 								</tbody>
@@ -119,7 +120,8 @@
 		              <div class="card-footer">
 		                <hr style="margin-top: 10px;">
 						<div class="button-group" align="right" style="margin-right: 45px; margin-top: 25px;">
-							<button type="button" class="btn btn-danger">Regresar</button>
+							<a class="btn btn-danger" th:href="@{/diagramas/{id}(id=${tarea.pool.diagrama.id})}">Regresar</a>
+					
 							<button type="button" class="btn btn-secondary" style="margin-left: 20px;" >Ejecutar Formulario</button>
 							<br><br>
 						</div>
@@ -142,10 +144,7 @@
 					<div class="modal-header">
 						<div class="row">
 						<div style="margin-left: 50px; margin-right: 50px">
-							<h4 class="modal-tittle">Campo del formulario</h4>
-							<p>Your dashboard is the first thing you see when you log in. The JIRA software 
-							dashboard is like your car's dashboard. Butinstead of showing your speed and fuel level, it show 
-							important information about your work-like your proyects, your activities and your issues.</p>
+							<h4 class="modal-tittle">Campo del formulario</h4>							
 						</div>
 						</div>
 					</div>
