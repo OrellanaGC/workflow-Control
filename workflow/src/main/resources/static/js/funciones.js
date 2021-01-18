@@ -142,3 +142,18 @@ function abrirmodal(){
 	idVariable.value=null;
 }
 
+//general tabla en postgresql
+function ejecutar(idTarea){
+	//console.log(idTarea);
+	var url = '/formulario/ejecutar/' + idTarea;
+	$.get(url, function(data ) {
+		console.log("creado");
+	})
+	.fail(function(data) {
+    	console.log(data); 
+      	Swal.fire(
+				'Ejecutado!',
+				'Se creo la tabla en postgresql.',
+				'success')
+  	});
+}

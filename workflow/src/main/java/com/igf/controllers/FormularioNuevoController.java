@@ -5,6 +5,10 @@ package com.igf.controllers;
 
 import java.util.Arrays;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.io.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +45,8 @@ public class FormularioNuevoController {
 	private DetalleVariableService detalleVariableService;
 	@Autowired
 	private OpcionesVariableService opcionesVariableService;
+	@PersistenceContext
+	EntityManager em;
 
 	@GetMapping("/{id}")
 	public String inicio(Model model, @PathVariable Long id) {
@@ -66,6 +72,7 @@ public class FormularioNuevoController {
 			@RequestParam("opciones") String opciones, @RequestParam("idVariable") Long idVariable) {
 		if (tareaService.exists(id)) {
 			Tarea tarea = tareaService.find(id).get();
+			tarea.setCambios(false);
 			DetalleVariable detalleVariable;
 			if (idVariable != null) {
 				detalleVariable = detalleVariableService.find(idVariable).get();
@@ -122,7 +129,8 @@ public class FormularioNuevoController {
 					opcionesVariableService.save(opcionesV);
 				}
 			}
-		}
+			tareaService.save(tarea);
+		}		
 		return "redirect:/formulario/" + id.toString();
 	}
 
@@ -158,7 +166,7 @@ public class FormularioNuevoController {
 			Tarea tarea = tareaService.find(id).get();
 			try {
 				BufferedWriter bw = new BufferedWriter(
-						new FileWriter("/home/aleml98-mint/Desktop/" + id.toString() + ".blade.html"));
+						new FileWriter("/home/aleml98-mint/Documents/Proyectos y entornos/workflow-laravel/resources/views/Formularios/" + id.toString() + ".blade.php"));
 				//Copiar inicio de formulario
 				BufferedReader inicio = new BufferedReader(new FileReader(
 						"/home/aleml98-mint/Desktop/Piezas formulario/Inicio.txt"));
@@ -242,6 +250,8 @@ public class FormularioNuevoController {
 				}
 				finalt.close();
 				bw.close();
+				tarea.setCambios(true);
+				tareaService.save(tarea);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -255,18 +265,36 @@ public class FormularioNuevoController {
 	@GetMapping("/eliminar/{id}")
 	public String delete(@PathVariable Long id, Model model) {
 		if (detalleVariableService.exists(id)) {
+			Tarea tarea= detalleVariableService.find(id).get().getTarea();
+			tarea.setCambios(false);
+			tareaService.save(tarea);
 			detalleVariableService.delete(id);
-		}
+		}		
 		return "redirect:/formulario";
 	}
-
-	// Editar campo de una tarea INCOMPLETO
-	@GetMapping("/editar/{idTarea}")
-	public String editar(Model model, @PathVariable("idTarea") Long id) {
-		if (tareaService.exists(id)) {
-			Tarea tarea = tareaService.find(id).get();
-			model.addAttribute("idTarea", tarea);
-		}
-		return "/formularioNuevo/edit";
+	
+	@GetMapping("/ejecutar/{id}")
+	public String ejecutar(Model model, @PathVariable Long id) {
+		if(tareaService.exists(id)) {
+			Tarea tarea= tareaService.find(id).get();
+			String nombreT= tarea.getNombre().replaceAll("\\s", "_")+id.toString();
+			String consulta= "DROP TABLE IF EXISTS " +nombreT +"; \nCreate table " + nombreT+"(\nid bigint primary key";
+			for (DetalleVariable detalleVariable : tarea.getDetalleVariables()) {				
+				if(detalleVariable.getTipoVariable().equals("Numero")) {
+					consulta= consulta+ ",\n" +detalleVariable.getNombreVariable().replaceAll("\\s", "_")+" real";
+				}else {
+					if(detalleVariable.getMaxCaracter()!=null) {
+						consulta= consulta+ ",\n"+ detalleVariable.getNombreVariable().replaceAll("\\s", "_")+" varchar("+detalleVariable.getMaxCaracter()+")";
+					}else {
+						consulta= consulta+ ",\n"+ detalleVariable.getNombreVariable().replaceAll("\\s", "_")+" varchar(255)";
+					}					
+				}
+			}
+			consulta= consulta + "); \n select * from "+nombreT+";";
+			System.out.println(consulta);
+			javax.persistence.Query query= em.createNativeQuery(consulta);
+			query.getSingleResult();
+		}		
+		return "redirect:/formulario/"+id.toString();
 	}
 }

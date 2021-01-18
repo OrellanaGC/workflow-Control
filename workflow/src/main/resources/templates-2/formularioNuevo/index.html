@@ -101,7 +101,6 @@
 											<a class="btn btn-info " data-toggle="modal" data-target="#modalVariable" 
 											th:attr="onclick=|modalVariable1('${{variable}}')|">Editar</a>											 
 											<a th:onclick="eliminar([[${variable.id}]], '/formulario/eliminar/', '/formulario/',[[${{tarea.id}}]])" class="btn btn-danger">Eliminar</a>
-
 										</td>										
 									</tr>									
 								</tbody>
@@ -109,8 +108,8 @@
 						</div>
 					</div>
 					<br>
-					<div align="right" style="margin-right: 45px;">
-						<button th:if="${{tarea.cambios == true}}" type="button" class="btn btn-secondary">Previsualizacion de<br>formulario</button>
+					<div align="right" style="margin-right: 45px;">				
+						<a th:href="@{http://127.0.0.1:8001/formulario/{id}(id=${tarea.id})}" th:if="${{tarea.cambios == true}}" class="btn btn-secondary">Previsualizacion de<br>formulario</a>						
 						<form th:action="@{/formulario/generar}" th:method="GET">
 							<input type="number" name="idTarea" th:value="${{tarea.id}}" hidden="true">
 							<button th:if="${{tarea.cambios != true && tarea.descripcion!=null && not #lists.isEmpty(tarea.detalleVariables)}}" type="submit" class="btn btn-secondary">Generar formulario</button>
@@ -119,10 +118,9 @@
 		              </div> <!-- FIN CARD BODY -->
 		              <div class="card-footer">
 		                <hr style="margin-top: 10px;">
-						<div class="button-group" align="right" style="margin-right: 45px; margin-top: 25px;">
+						<div class="button-group" align="right" style="margin-right: 45px; margin-top: 25px;">							
 							<a class="btn btn-danger" th:href="@{/diagramas/{id}(id=${tarea.pool.diagrama.id})}">Regresar</a>
-					
-							<button type="button" class="btn btn-secondary" style="margin-left: 20px;" >Ejecutar Formulario</button>
+							<button th:if="${{tarea.cambios == true}}" th:onclick="ejecutar([[${tarea.id}]])" type="submit" class="btn btn-secondary" style="margin-left: 20px;" >Ejecutar Formulario</button>							
 							<br><br>
 						</div>
 		              </div>
